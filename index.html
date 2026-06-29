@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>fourth of july camping trip ✸</title>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700&family=DM+Sans:wght@400;500;700&display=swap');
+
+  :root {
+    --bg-page: #faf7f2;
+    --bg-card: #ffffff;
+    --bg-section: #f5f0ea;
+    --text-primary: #2d2a26;
+    --text-secondary: #6b6560;
+    --text-tertiary: #8a8580;
+    --text-faint: #a8a29e;
+    --border-light: #eee8e0;
+    --border-dashed: #d4cfc8;
+    --blue-bg: #dbeafe;   --blue-text: #1e40af;  --blue-mid: #2563eb;
+    --pink-bg: #fce7f3;   --pink-text: #9d174d;  --pink-mid: #be185d;
+    --mint-bg: #d1fae5;   --mint-text: #065f46;  --mint-mid: #059669;
+    --yellow-bg: #fef3c7; --yellow-text: #92400e;--yellow-mid: #d97706;
+    --orange-bg: #ffedd5; --orange-text: #9a3412;--orange-mid: #ea580c;
+    --purple-bg: #ede9fe; --purple-text: #5b21b6;--purple-mid: #7c3aed;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg-page);
+    color: var(--text-primary);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 40px 28px 64px; }
+
+  /* ——— hero ——— */
+  .hero {
+    position: relative;
+    background:
+      radial-gradient(circle at 14% 18%, rgba(37,99,235,0.10), transparent 42%),
+      radial-gradient(circle at 86% 22%, rgba(190,24,93,0.10), transparent 44%),
+      linear-gradient(160deg, #fffdfa 0%, #f7f1ea 100%);
+    border: 1px solid var(--border-light);
+    border-radius: 24px;
+    padding: 46px 40px 40px;
+    overflow: hidden;
+    text-align: center;
+  }
+  .hero .sparkles { position: absolute; inset: 0; pointer-events: none; }
+  .hero .sparkles i {
+    position: absolute; opacity: 0.5; font-size: 22px;
+    animation: float 6s ease-in-out infinite;
+  }
+  .hero .sparkles i:nth-child(1){ top: 22px; left: 8%; color: var(--blue-mid); animation-delay: 0s;}
+  .hero .sparkles i:nth-child(2){ top: 64px; right: 11%; color: var(--pink-mid); font-size: 26px; animation-delay: 1.2s;}
+  .hero .sparkles i:nth-child(3){ bottom: 30px; left: 14%; color: var(--yellow-mid); font-size: 18px; animation-delay: 2.1s;}
+  .hero .sparkles i:nth-child(4){ bottom: 54px; right: 8%; color: var(--blue-mid); font-size: 20px; animation-delay: 0.6s;}
+  .hero .sparkles i:nth-child(5){ top: 40%; left: 4%; color: var(--pink-mid); font-size: 16px; animation-delay: 1.8s;}
+  @keyframes float { 0%,100%{ transform: translateY(0) rotate(-4deg);} 50%{ transform: translateY(-10px) rotate(4deg);} }
+
+  .kicker {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--blue-bg); color: var(--blue-text);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 20px; margin-bottom: 18px;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 54px; line-height: 1.02; font-weight: 700;
+    color: var(--text-primary); letter-spacing: -0.01em;
+    position: relative; z-index: 1;
+  }
+  h1 .pop { color: var(--pink-mid); }
+  h1 .pop2 { color: var(--blue-mid); }
+  .hero .dates {
+    display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center;
+    margin-top: 16px; font-size: 17px; color: var(--text-secondary); font-weight: 500;
+  }
+  .hero .dates .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--border-dashed); }
+
+  /* ——— countdown ——— */
+  .countdown { display: flex; gap: 12px; justify-content: center; margin-top: 26px; position: relative; z-index: 1; }
+  .cd-cell {
+    background: var(--bg-card); border: 1px solid var(--border-light);
+    border-radius: 14px; padding: 12px 6px; min-width: 76px; box-shadow: 0 2px 0 rgba(0,0,0,0.02);
+  }
+  .cd-num { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 700; color: var(--blue-mid); line-height: 1; }
+  .cd-lbl { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-tertiary); margin-top: 6px; }
+  .cd-done { font-family: 'Fraunces', serif; font-size: 22px; color: var(--pink-mid); }
+
+  /* ——— sections ——— */
+  section { margin-top: 44px; }
+  .section-header { display: flex; align-items: center; gap: 13px; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 2px solid var(--border-light); }
+  .section-header h2 { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 600; }
+  .section-header .sub { font-size: 13px; color: var(--text-tertiary); margin-top: 2px; }
+  .icon-circle { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .icon-circle i { font-size: 22px; line-height: 1; }
+  .ic-blue { background: var(--blue-bg); } .ic-blue i { color: var(--blue-text); }
+  .ic-orange { background: var(--orange-bg); } .ic-orange i { color: var(--orange-text); }
+  .ic-mint { background: var(--mint-bg); } .ic-mint i { color: var(--mint-text); }
+  .ic-pink { background: var(--pink-bg); } .ic-pink i { color: var(--pink-text); }
+  .ic-yellow { background: var(--yellow-bg); } .ic-yellow i { color: var(--yellow-text); }
+
+  .tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .tag-blue { background: var(--blue-bg); color: var(--blue-text); }
+  .tag-pink { background: var(--pink-bg); color: var(--pink-text); }
+  .tag-mint { background: var(--mint-bg); color: var(--mint-text); }
+  .tag-orange { background: var(--orange-bg); color: var(--orange-text); }
+  .tag-yellow { background: var(--yellow-bg); color: var(--yellow-text); }
+
+  .placeholder { color: var(--pink-mid); font-weight: 600; }
+
+  /* ——— the spot ——— */
+  .spot-card {
+    background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 16px;
+    padding: 26px 28px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+  }
+  .spot-name { font-family: 'Fraunces', serif; font-size: 22px; margin-bottom: 6px; }
+  .spot-addr { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+  .spot-meta { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .map-btn {
+    display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+    background: var(--blue-mid); color: #fff; font-weight: 600; font-size: 14px;
+    padding: 12px 22px; border-radius: 22px; white-space: nowrap; transition: transform .15s, box-shadow .15s;
+    box-shadow: 0 4px 14px rgba(37,99,235,0.25);
+  }
+  .map-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.32); }
+  .info-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 16px; }
+  .info-chip { background: var(--bg-section); border-radius: 12px; padding: 14px 16px; }
+  .info-chip .lbl { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); display: flex; align-items: center; gap: 6px; }
+  .info-chip .val { font-size: 14px; color: var(--text-secondary); margin-top: 5px; line-height: 1.5; }
+
+  /* ——— meal plan ——— */
+  .meal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+  .day-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 16px; overflow: hidden; }
+  .day-head { padding: 16px 20px 14px; border-bottom: 1px solid var(--border-light); display: flex; align-items: baseline; justify-content: space-between; }
+  .day-head .d { font-family: 'Fraunces', serif; font-size: 20px; }
+  .day-head .dn { font-size: 12px; color: var(--text-tertiary); font-weight: 600; }
+  .meal { padding: 13px 20px; border-bottom: 1px dashed var(--border-dashed); }
+  .meal:last-child { border-bottom: none; }
+  .meal .when { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--orange-mid); display: flex; align-items: center; gap: 6px; }
+  .meal .what { font-size: 14px; color: var(--text-secondary); margin-top: 5px; line-height: 1.5; }
+
+  /* ——— packing list ——— */
+  .pack-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+  .pack-progress { flex: 1; min-width: 220px; }
+  .pp-bar { height: 8px; background: var(--border-light); border-radius: 4px; overflow: hidden; }
+  .pp-fill { height: 100%; background: var(--mint-mid); border-radius: 4px; width: 0; transition: width .3s ease; }
+  .pp-text { font-size: 13px; color: var(--text-tertiary); margin-top: 7px; font-weight: 500; }
+  .reset-btn { background: #fff; border: 1.5px solid var(--border-dashed); color: var(--text-secondary); border-radius: 20px; padding: 8px 18px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; }
+  .reset-btn:hover { border-color: var(--text-tertiary); }
+
+  .pack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 18px; align-items: start; }
+  .pack-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 16px; padding: 8px 20px 14px; }
+  .pack-card h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); padding: 16px 0 6px; display: flex; align-items: center; gap: 8px; }
+  .pack-card h3 i { font-size: 16px; }
+  .check-item { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border-light); cursor: pointer; user-select: none; }
+  .check-item:last-child { border-bottom: none; }
+  .check-btn { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--border-dashed); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .15s; background: #fff; }
+  .check-btn svg { width: 13px; height: 13px; fill: transparent; transition: fill .15s; }
+  .check-label { font-size: 14.5px; color: var(--text-secondary); transition: color .15s; }
+  .check-item.done .check-label { color: var(--text-faint); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+
+  .section-mint  .check-item.done .check-btn { background: var(--mint-bg);  border-color: var(--mint-bg); }
+  .section-mint  .check-item.done .check-btn svg { fill: var(--mint-text); }
+  .section-blue  .check-item.done .check-btn { background: var(--blue-bg);  border-color: var(--blue-bg); }
+  .section-blue  .check-item.done .check-btn svg { fill: var(--blue-text); }
+  .section-pink  .check-item.done .check-btn { background: var(--pink-bg);  border-color: var(--pink-bg); }
+  .section-pink  .check-item.done .check-btn svg { fill: var(--pink-text); }
+  .section-orange .check-item.done .check-btn { background: var(--orange-bg); border-color: var(--orange-bg); }
+  .section-orange .check-item.done .check-btn svg { fill: var(--orange-text); }
+
+  /* ——— crew ——— */
+  .crew-wrap { display: flex; flex-wrap: wrap; gap: 11px; }
+  .crew-chip {
+    display: inline-flex; align-items: center; gap: 9px; background: var(--bg-card);
+    border: 1px solid var(--border-light); border-radius: 40px; padding: 8px 18px 8px 8px; font-weight: 600; font-size: 15px;
+  }
+  .crew-av { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; }
+
+  /* ——— notes ——— */
+  .notes-section { background: var(--bg-section); border-radius: 16px; padding: 26px 30px; }
+  .notes-section h2 { font-family: 'Fraunces', serif; font-size: 22px; margin-bottom: 14px; }
+  .notes-section ul { list-style: none; }
+  .notes-section li { font-size: 15px; color: var(--text-secondary); padding: 7px 0 7px 26px; position: relative; line-height: 1.55; }
+  .notes-section li::before { content: "→"; position: absolute; left: 0; color: var(--pink-mid); font-weight: 700; }
+
+  .footer { text-align: center; margin-top: 50px; font-size: 13px; color: var(--text-faint); line-height: 1.7; }
+  .footer .stars { color: var(--blue-mid); letter-spacing: 4px; font-size: 16px; }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 28px 18px 48px; }
+    h1 { font-size: 38px; }
+    .hero { padding: 36px 22px 30px; }
+    .spot-card { grid-template-columns: 1fr; text-align: left; }
+    .countdown { gap: 8px; }
+    .cd-cell { min-width: 64px; padding: 10px 4px; }
+    .cd-num { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ——————————— hero ——————————— -->
+  <div class="hero">
+    <div class="sparkles">
+      <i class="ph ph-firework"></i>
+      <i class="ph ph-star-four"></i>
+      <i class="ph ph-sparkle"></i>
+      <i class="ph ph-firework"></i>
+      <i class="ph ph-star-four"></i>
+    </div>
+    <span class="kicker"><i class="ph ph-tent"></i> red, white &amp; the great outdoors</span>
+    <h1>fourth of july<br><span class="pop">camping</span> <span class="pop2">weekend</span></h1>
+    <div class="dates">
+      <span><i class="ph ph-calendar-dots"></i> fri jul 3</span>
+      <span class="dot"></span>
+      <span>sun jul 5, 2026</span>
+      <span class="dot"></span>
+      <span>9 of us</span>
+    </div>
+    <div class="countdown" id="countdown">
+      <div class="cd-cell"><div class="cd-num" id="cd-days">–</div><div class="cd-lbl">days</div></div>
+      <div class="cd-cell"><div class="cd-num" id="cd-hours">–</div><div class="cd-lbl">hours</div></div>
+      <div class="cd-cell"><div class="cd-num" id="cd-mins">–</div><div class="cd-lbl">mins</div></div>
+      <div class="cd-cell"><div class="cd-num" id="cd-secs">–</div><div class="cd-lbl">secs</div></div>
+    </div>
+  </div>
+
+  <!-- ——————————— the spot ——————————— -->
+  <section>
+    <div class="section-header">
+      <div class="icon-circle ic-blue"><i class="ph ph-map-pin-area"></i></div>
+      <div><h2>the spot</h2><div class="sub">where we're pitching tents</div></div>
+    </div>
+    <div class="spot-card">
+      <div>
+        <div class="spot-name" id="spot-name"><span class="placeholder">add the campground name →</span></div>
+        <div class="spot-addr" id="spot-addr"><span class="placeholder">drop the full address here (or a maps link) and i'll wire up the button</span></div>
+        <div class="spot-meta">
+          <span class="tag tag-blue">campsite tbd</span>
+          <span class="tag tag-mint">tents</span>
+        </div>
+      </div>
+      <a class="map-btn" id="map-btn" href="#" target="_blank" rel="noopener"><i class="ph ph-navigation-arrow"></i> directions</a>
+    </div>
+    <div class="info-row">
+      <div class="info-chip">
+        <div class="lbl"><i class="ph ph-clock"></i> arrival</div>
+        <div class="val">aim to roll in fri before dark — easier to set up tents in daylight</div>
+      </div>
+      <div class="info-chip">
+        <div class="lbl"><i class="ph ph-car-profile"></i> carpools</div>
+        <div class="val">coordinate rides in the group chat — fewer cars = easier parking</div>
+      </div>
+      <div class="info-chip">
+        <div class="lbl"><i class="ph ph-wifi-slash"></i> signal</div>
+        <div class="val">assume spotty service — screenshot directions before you leave town</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ——————————— meal plan ——————————— -->
+  <section>
+    <div class="section-header">
+      <div class="icon-circle ic-orange"><i class="ph ph-cooking-pot"></i></div>
+      <div><h2>meal plan</h2><div class="sub">draft cookout menu — send me yours and i'll swap it in</div></div>
+    </div>
+    <div class="meal-grid">
+
+      <div class="day-card">
+        <div class="day-head"><span class="d">friday</span><span class="dn">jul 3 · arrival</span></div>
+        <div class="meal">
+          <div class="when"><i class="ph ph-fire"></i> dinner</div>
+          <div class="what">burgers &amp; dogs on the grill, chips, watermelon — easy first night</div>
+        </div>
+        <div class="meal">
+          <div class="when"><i class="ph ph-campfire"></i> late night</div>
+          <div class="what">s'mores around the fire 🔥</div>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-head"><span class="d">saturday</span><span class="dn">jul 4 · the big day</span></div>
+        <div class="meal">
+          <div class="when"><i class="ph ph-sun-horizon"></i> breakfast</div>
+          <div class="what">foil-packet breakfast scrambles + coffee on the camp stove</div>
+        </div>
+        <div class="meal">
+          <div class="when"><i class="ph ph-hamburger"></i> lunch</div>
+          <div class="what">build-your-own sandwiches + fruit — keep it light for the heat</div>
+        </div>
+        <div class="meal">
+          <div class="when"><i class="ph ph-fire"></i> dinner</div>
+          <div class="what">4th of july cookout — bbq chicken, corn on the cob, pasta salad, red + blue berries</div>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-head"><span class="d">sunday</span><span class="dn">jul 5 · pack out</span></div>
+        <div class="meal">
+          <div class="when"><i class="ph ph-coffee"></i> breakfast</div>
+          <div class="what">pancakes + bacon, finish the coffee, use up leftovers before we break camp</div>
+        </div>
+        <div class="meal">
+          <div class="when"><i class="ph ph-shopping-bag"></i> snacks for the road</div>
+          <div class="what">trail mix, jerky, whatever's left in the cooler</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ——————————— packing list ——————————— -->
+  <section>
+    <div class="section-header">
+      <div class="icon-circle ic-mint"><i class="ph ph-backpack"></i></div>
+      <div><h2>packing list</h2><div class="sub">tap to check off — it saves on your phone</div></div>
+    </div>
+
+    <div class="pack-top">
+      <div class="pack-progress">
+        <div class="pp-bar"><div class="pp-fill" id="pp-fill"></div></div>
+        <div class="pp-text" id="pp-text">0 of 0 packed</div>
+      </div>
+      <button class="reset-btn" id="reset-btn"><i class="ph ph-arrow-counter-clockwise"></i> reset list</button>
+    </div>
+
+    <div class="pack-grid">
+
+      <div class="pack-card section-pink">
+        <h3><i class="ph ph-user-circle"></i> everyone brings (personal)</h3>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sleeping bag + pillow</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sleeping pad / air mattress</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">clothes + warm layer for night</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">swimsuit + towel</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">red/white/blue fit for the 4th 🇺🇸</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">toiletries + meds</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">water bottle</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">headlamp / flashlight</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">phone + battery pack</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">camp chair</span></div>
+      </div>
+
+      <div class="pack-card section-mint">
+        <h3><i class="ph ph-tent"></i> group gear (claim one!)</h3>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">tents + stakes</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">coolers + ice</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">grill / camp stove + propane</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">firewood + lighter / matches</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">cooking pot, pan + utensils</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">plates, cups, cutlery, napkins</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">trash + recycling bags</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">bluetooth speaker</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">canopy / shade tent</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">lawn games (cornhole, spikeball)</span></div>
+      </div>
+
+      <div class="pack-card section-orange">
+        <h3><i class="ph ph-sun"></i> don't-forget extras</h3>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sunscreen (reapply!)</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">bug spray</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">first-aid kit</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">extra cash for firewood / fees</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sunglasses + hat</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sparklers + glow sticks ✸</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">paper towels + dish soap</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">camera / disposable cam</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ——————————— crew ——————————— -->
+  <section>
+    <div class="section-header">
+      <div class="icon-circle ic-pink"><i class="ph ph-users-three"></i></div>
+      <div><h2>the crew</h2><div class="sub">9 deep this weekend</div></div>
+    </div>
+    <div class="crew-wrap" id="crew-wrap"></div>
+  </section>
+
+  <!-- ——————————— notes ——————————— -->
+  <section>
+    <div class="notes-section">
+      <h2>good to know</h2>
+      <ul>
+        <li>leave no trace — pack out everything we bring in, douse the fire fully before bed</li>
+        <li>check the campground's fire rules before the 4th — burn bans + firework rules vary by site</li>
+        <li>throw a gallon of water per person per day in the cooler plan — it goes fast in july heat</li>
+        <li>assign a "cooler captain" so the ice doesn't melt by saturday</li>
+        <li>charge everything friday morning — power's a luxury out there</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div class="stars">✸ ✷ ✸</div>
+    happy 4th, see you at camp<br>
+    made with love · last updated june 2026
+  </div>
+
+</div>
+
+<script>
+  // ——— crew avatars ———
+  const crew = ["Chad","Alexa","Ali","Cheech","Mike","Ali","Jack","Emme","Me"];
+  const avColors = [
+    ["var(--blue-bg)","var(--blue-text)"],
+    ["var(--pink-bg)","var(--pink-text)"],
+    ["var(--mint-bg)","var(--mint-text)"],
+    ["var(--orange-bg)","var(--orange-text)"],
+    ["var(--yellow-bg)","var(--yellow-text)"],
+    ["var(--purple-bg)","var(--purple-text)"],
+  ];
+  const crewWrap = document.getElementById("crew-wrap");
+  crew.forEach((name, i) => {
+    const c = avColors[i % avColors.length];
+    const chip = document.createElement("div");
+    chip.className = "crew-chip";
+    chip.innerHTML = `<span class="crew-av" style="background:${c[0]};color:${c[1]}">${name[0]}</span>${name}`;
+    crewWrap.appendChild(chip);
+  });
+
+  // ——— countdown to fri jul 3, 2026, 12pm ———
+  const target = new Date("2026-07-03T12:00:00").getTime();
+  function tick() {
+    const diff = target - Date.now();
+    const cd = document.getElementById("countdown");
+    if (diff <= 0) {
+      cd.innerHTML = '<div class="cd-done">✸ it\'s go time — see you at camp! ✸</div>';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById("cd-days").textContent = d;
+    document.getElementById("cd-hours").textContent = h;
+    document.getElementById("cd-mins").textContent = m;
+    document.getElementById("cd-secs").textContent = s;
+  }
+  tick(); setInterval(tick, 1000);
+
+  // ——— packing list w/ localStorage ———
+  const STORE = "july4camp.packing.v1";
+  const items = document.querySelectorAll(".check-item");
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch(e){}
+
+  function keyFor(el){ return el.querySelector(".check-label").textContent.trim(); }
+  function updateProgress(){
+    const total = items.length;
+    let done = 0;
+    items.forEach(el => { if (el.classList.contains("done")) done++; });
+    const pct = total ? Math.round(done/total*100) : 0;
+    document.getElementById("pp-fill").style.width = pct + "%";
+    document.getElementById("pp-text").textContent = `${done} of ${total} packed · ${pct}%`;
+  }
+  items.forEach(el => {
+    const k = keyFor(el);
+    if (saved[k]) el.classList.add("done");
+    el.addEventListener("click", () => {
+      el.classList.toggle("done");
+      saved[k] = el.classList.contains("done");
+      localStorage.setItem(STORE, JSON.stringify(saved));
+      updateProgress();
+    });
+  });
+  updateProgress();
+
+  document.getElementById("reset-btn").addEventListener("click", () => {
+    items.forEach(el => el.classList.remove("done"));
+    saved = {}; localStorage.removeItem(STORE); updateProgress();
+  });
+
+  // ——— maps button: disabled until address added ———
+  document.getElementById("map-btn").addEventListener("click", (e) => {
+    const href = e.currentTarget.getAttribute("href");
+    if (!href || href === "#") { e.preventDefault(); alert("add the campground address first — then this'll open directions"); }
+  });
+</script>
+</body>
+</html>
