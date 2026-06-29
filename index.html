@@ -3,516 +3,444 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0a2351">
-<title>🎆 fourth of july camping weekend</title>
-<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/fill/style.css" />
+<meta name="theme-color" content="#0a3161">
+<title>Fourth of July · Camping Weekend</title>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css" />
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Rye&family=Pacifico&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
   :root {
-    --red: #c8102e;        /* old glory red */
-    --red-dk: #9e0b24;
-    --navy: #0a2351;       /* old glory blue (deepened) */
-    --navy-2: #122e63;
-    --bg: #eef2fb;         /* cool light blue — crisp, not cream */
-    --bg-tint: #e6ecf9;    /* soft blue tint for chips */
-    --white: #ffffff;
-    --gold: #f4b942;
-    --gold-dk: #b07d10;
-    --ink: #1a2238;
-    --muted: #5b6172;
-    --line: #dde4f1;       /* cool blue-gray border */
+    --red: #b22234;  --red-dk: #8e1a2a;
+    --navy: #0a3161; --navy-2: #143d76;
+    --gold: #c79a2e;
+    --bg: #eef2f8;   --bg-tint: #e5ebf5;
+    --card: #ffffff;
+    --ink: #16233a;  --muted: #5a6477; --faint: #8a93a6;
+    --line: #dde3ee;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
   html { -webkit-text-size-adjust: 100%; }
-
   body {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Inter', sans-serif;
     background:
-      radial-gradient(circle at 100% 0%, rgba(200,16,46,.06), transparent 38%),
-      radial-gradient(circle at 0% 100%, rgba(10,35,81,.07), transparent 40%),
+      radial-gradient(circle at 100% 0%, rgba(178,34,52,.05), transparent 36%),
+      radial-gradient(circle at 0% 100%, rgba(10,49,97,.06), transparent 38%),
       var(--bg);
     background-attachment: fixed;
     color: var(--ink);
-    min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
 
-  /* falling stars overlay */
-  #starfall { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 60; }
-  .falling-star { position: absolute; top: -44px; line-height: 1; will-change: transform, opacity; text-shadow: 0 0 6px rgba(0,0,0,.06); }
+  /* falling stars */
+  #starfall { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 5; }
+  .falling-star { position: absolute; top: -40px; line-height: 1; will-change: transform, opacity; }
   @keyframes fall {
-    0%   { transform: translateY(-44px) rotate(0deg); opacity: 0; }
-    12%  { opacity: var(--op); }
-    88%  { opacity: var(--op); }
-    100% { transform: translateY(112vh) rotate(var(--spin)); opacity: 0; }
+    0%   { transform: translateY(-40px) rotate(0); opacity: 0; }
+    14%  { opacity: var(--op); }
+    86%  { opacity: var(--op); }
+    100% { transform: translateY(108vh) rotate(var(--spin)); opacity: 0; }
   }
   @media (prefers-reduced-motion: reduce) { #starfall { display: none; } }
 
-  /* stars-and-stripes top bar */
-  .flag-bar { height: 8px; display: flex; }
-  .flag-bar span { flex: 1; }
-  .flag-bar .r { background: var(--red); }
-  .flag-bar .w { background: var(--white); }
-  .flag-bar .b { background: var(--navy); }
-
-  .wrap { max-width: 520px; margin: 0 auto; padding: 0 16px 48px; }
-
-  /* ——— hero ——— */
-  .hero {
-    position: relative;
-    margin: 16px 0 0;
-    border-radius: 22px;
-    padding: 30px 22px 26px;
-    text-align: center;
-    color: var(--white);
-    background:
-      radial-gradient(circle at 18% 22%, rgba(255,255,255,.10), transparent 30%),
-      radial-gradient(circle at 82% 70%, rgba(244,185,66,.16), transparent 34%),
-      linear-gradient(160deg, #143a7a 0%, var(--navy) 60%, #07183a 100%);
-    overflow: hidden;
-    box-shadow: 0 14px 34px rgba(10,35,81,.28);
+  /* ——— sticky top bar + tabs ——— */
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(238,242,248,.86); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
   }
-  /* star field */
-  .hero::before {
-    content: "";
-    position: absolute; inset: 0;
-    background-image:
-      radial-gradient(1.6px 1.6px at 12% 18%, rgba(255,255,255,.9), transparent),
-      radial-gradient(1.4px 1.4px at 28% 60%, rgba(255,255,255,.7), transparent),
-      radial-gradient(1.6px 1.6px at 48% 30%, rgba(255,255,255,.8), transparent),
-      radial-gradient(1.3px 1.3px at 68% 72%, rgba(255,255,255,.6), transparent),
-      radial-gradient(1.6px 1.6px at 84% 24%, rgba(255,255,255,.85), transparent),
-      radial-gradient(1.3px 1.3px at 92% 56%, rgba(255,255,255,.6), transparent),
-      radial-gradient(1.4px 1.4px at 8% 80%, rgba(255,255,255,.7), transparent);
-    pointer-events: none;
+  .topbar-inner { max-width: 640px; margin: 0 auto; padding: 14px 18px 0; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .flag-chip {
+    width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px;
+    background: linear-gradient(150deg, var(--red) 0 50%, var(--navy) 50% 100%);
   }
-  .hero .fw { position: absolute; pointer-events: none; opacity: .9; }
-  .hero .fw i { font-size: 26px; }
-  .hero .fw1 { top: 14px; left: 14px; color: var(--gold); animation: twinkle 3.2s ease-in-out infinite; }
-  .hero .fw2 { top: 20px; right: 16px; color: var(--red); animation: twinkle 3.2s ease-in-out infinite .8s; }
-  .hero .fw3 { bottom: 96px; right: 22px; color: #7fb0ff; font-size: 20px; animation: twinkle 3.2s ease-in-out infinite 1.6s; }
-  @keyframes twinkle { 0%,100%{ transform: scale(1); opacity:.55;} 50%{ transform: scale(1.18); opacity:1;} }
+  .brand h1 { font-family: 'Archivo'; font-weight: 800; font-size: 21px; letter-spacing: -.01em; color: var(--navy); line-height: 1.1; }
+  .brand .sub { font-size: 12.5px; color: var(--muted); font-weight: 500; margin-top: 1px; }
 
-  .kicker {
-    position: relative; z-index: 1;
-    display: inline-flex; align-items: center; gap: 7px;
-    background: var(--red); color: #fff;
-    font-family: 'Nunito'; font-weight: 800;
-    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
-    padding: 7px 15px; border-radius: 30px; margin-bottom: 16px;
-    box-shadow: 0 4px 14px rgba(200,16,46,.4);
+  .tabbar { display: flex; gap: 4px; margin-top: 12px; }
+  .tab {
+    flex: 1; appearance: none; border: none; background: transparent; cursor: pointer;
+    font-family: 'Archivo'; font-weight: 600; font-size: 14px; color: var(--faint);
+    padding: 11px 6px 13px; border-bottom: 2.5px solid transparent; transition: color .15s, border-color .15s;
   }
-  .stars-line { position: relative; z-index: 1; color: var(--gold); letter-spacing: 8px; font-size: 13px; margin-bottom: 6px; }
-  h1 {
-    position: relative; z-index: 1;
-    font-family: 'Rye', serif;
-    font-size: 40px; line-height: 1.05; letter-spacing: .5px;
-    text-shadow: 0 2px 0 rgba(0,0,0,.18);
-  }
-  h1 .script { display: block; font-family: 'Pacifico', cursive; }
-  h1 .l1 { color: #fff; }
-  h1 .l2 { color: var(--gold); font-size: 44px; }
-  .hero .dates {
-    position: relative; z-index: 1;
-    margin-top: 14px; font-family: 'Fredoka'; font-weight: 600;
-    font-size: 16px; color: rgba(255,255,255,.92);
-    display: flex; align-items: center; justify-content: center; gap: 9px; flex-wrap: wrap;
-  }
-  .hero .dates .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+  .tab.active { color: var(--navy); border-bottom-color: var(--red); }
 
-  .countdown { position: relative; z-index: 1; display: flex; gap: 8px; justify-content: center; margin-top: 22px; }
-  .cd-cell {
-    background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.18);
-    backdrop-filter: blur(2px);
-    border-radius: 14px; padding: 12px 4px; flex: 1; max-width: 78px;
-  }
-  .cd-num { font-family: 'Fredoka'; font-weight: 700; font-size: 30px; color: var(--gold); line-height: 1; }
-  .cd-lbl { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.75); margin-top: 6px; }
-  .cd-done { font-family: 'Pacifico', cursive; font-size: 22px; color: var(--gold); line-height: 1.3; }
+  /* ——— panels ——— */
+  main { max-width: 640px; margin: 0 auto; padding: 22px 18px 56px; position: relative; z-index: 10; }
+  .panel { display: none; animation: fade .25s ease; }
+  .panel.active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-  /* ——— sections ——— */
-  section { margin-top: 30px; }
-  .sec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-  .sec-icon {
-    width: 46px; height: 46px; border-radius: 14px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center; color: #fff;
-    box-shadow: 0 5px 14px rgba(0,0,0,.12);
-  }
-  .sec-icon i { font-size: 24px; }
-  .ic-red { background: linear-gradient(150deg, #e23a52, var(--red)); }
-  .ic-navy { background: linear-gradient(150deg, #1c4392, var(--navy)); }
-  .ic-gold { background: linear-gradient(150deg, #f6cf6a, var(--gold)); color: var(--navy); }
-  .sec-head h2 { font-family: 'Fredoka'; font-weight: 700; font-size: 24px; color: var(--navy); line-height: 1.1; }
-  .sec-head .sub { font-size: 13px; color: var(--muted); font-weight: 600; margin-top: 1px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 3px 12px rgba(22,35,58,.05); }
+  .block-label { font-family: 'Archivo'; font-weight: 700; font-size: 12px; letter-spacing: .07em; text-transform: uppercase; color: var(--red); margin-bottom: 11px; }
+  .stack { display: flex; flex-direction: column; gap: 18px; }
 
-  .card {
-    background: var(--white); border: 1px solid var(--line); border-radius: 18px;
-    box-shadow: 0 4px 14px rgba(26,34,56,.05);
-  }
+  /* ——— countdown ——— */
+  .count-card { padding: 20px; text-align: center; background: linear-gradient(155deg, var(--navy-2), var(--navy)); border: none; color: #fff; }
+  .count-card .when { font-family:'Archivo'; font-weight: 600; font-size: 15px; color: rgba(255,255,255,.8); }
+  .countdown { display: flex; gap: 8px; justify-content: center; margin-top: 14px; }
+  .cd-cell { background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.16); border-radius: 12px; padding: 11px 4px; flex: 1; max-width: 80px; }
+  .cd-num { font-family:'Archivo'; font-weight: 800; font-size: 28px; line-height: 1; color: #fff; }
+  .cd-lbl { font-size: 10px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-top: 6px; }
+  .cd-done { font-family:'Archivo'; font-weight: 700; font-size: 18px; color: var(--gold); }
 
-  .pill { display: inline-block; font-family:'Fredoka'; font-size: 11px; font-weight: 600; padding: 4px 11px; border-radius: 20px; letter-spacing: .02em; }
-  .pill-red { background: #fde7ea; color: var(--red-dk); }
-  .pill-navy { background: #e1e9fa; color: var(--navy); }
-  .pill-gold { background: #fdf0d2; color: #9a6a00; }
+  /* ——— weather ——— */
+  .wx-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .wx-day { background: var(--bg-tint); border-radius: 13px; padding: 14px 8px; text-align: center; }
+  .wx-day .dow { font-family:'Archivo'; font-weight: 700; font-size: 13px; color: var(--navy); }
+  .wx-day .date { font-size: 11px; color: var(--faint); margin-bottom: 6px; }
+  .wx-day .ico { font-size: 28px; color: var(--navy-2); margin: 2px 0; }
+  .wx-day .ico.sun { color: var(--gold); }
+  .wx-day .hi { font-family:'Archivo'; font-weight: 700; font-size: 17px; color: var(--ink); }
+  .wx-day .lo { font-size: 12px; color: var(--muted); }
+  .wx-day .pop { font-size: 11px; color: var(--navy-2); margin-top: 4px; font-weight: 600; }
+  .wx-state { padding: 16px; display: flex; gap: 12px; align-items: center; color: var(--muted); font-size: 13.5px; line-height: 1.45; }
+  .wx-state i { font-size: 26px; color: var(--navy-2); flex-shrink: 0; }
+  .wx-note { font-size: 11.5px; color: var(--faint); margin-top: 10px; text-align: center; }
 
-  .ph-note { color: var(--red); font-weight: 800; }
-
-  /* ——— the spot ——— */
-  .spot { padding: 22px 20px; }
-  .spot-name { font-family: 'Fredoka'; font-weight: 700; font-size: 20px; color: var(--navy); margin-bottom: 6px; }
-  .spot-addr { font-size: 15px; color: var(--muted); line-height: 1.55; font-weight: 600; }
-  .spot-pills { margin-top: 12px; display: flex; gap: 7px; flex-wrap: wrap; }
+  /* ——— address ——— */
+  .addr-card { padding: 20px; }
+  .addr { font-family:'Archivo'; font-weight: 700; font-size: 20px; color: var(--navy); }
+  .addr-sub { font-size: 13.5px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
   .map-btn {
-    display: flex; align-items: center; justify-content: center; gap: 9px;
-    margin-top: 16px; width: 100%; text-decoration: none;
-    background: var(--red); color: #fff; font-family:'Fredoka'; font-weight: 600; font-size: 16px;
-    padding: 15px; border-radius: 14px; min-height: 52px;
-    box-shadow: 0 6px 16px rgba(200,16,46,.32);
+    display: flex; align-items: center; justify-content: center; gap: 9px; margin-top: 15px; width: 100%;
+    text-decoration: none; background: var(--red); color: #fff; font-family:'Archivo'; font-weight: 600; font-size: 15px;
+    padding: 14px; border-radius: 12px; min-height: 50px; box-shadow: 0 5px 14px rgba(178,34,52,.28);
   }
-  .map-btn:active { transform: scale(.98); }
-  .info-stack { margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
-  .info-chip { background: var(--bg-tint); border: 1px solid var(--line); border-radius: 13px; padding: 13px 15px; display: flex; gap: 12px; align-items: flex-start; }
-  .info-chip i { font-size: 20px; color: var(--red); margin-top: 1px; }
-  .info-chip .lbl { font-family:'Fredoka'; font-weight: 600; font-size: 14px; color: var(--navy); }
-  .info-chip .val { font-size: 13.5px; color: var(--muted); margin-top: 2px; line-height: 1.45; font-weight: 600; }
+  .map-btn:active { transform: scale(.985); }
+  .logi { margin-top: 14px; display: flex; flex-direction: column; gap: 9px; }
+  .logi-row { display: flex; gap: 11px; align-items: flex-start; }
+  .logi-row i { font-size: 19px; color: var(--red); margin-top: 1px; flex-shrink: 0; }
+  .logi-row b { font-family:'Archivo'; font-weight: 600; font-size: 13.5px; color: var(--navy); display: block; }
+  .logi-row span { font-size: 13px; color: var(--muted); line-height: 1.45; }
 
-  /* ——— meal plan ——— */
-  .meal-stack { display: flex; flex-direction: column; gap: 14px; }
+  /* ——— crew + notes ——— */
+  .crew { display: flex; flex-wrap: wrap; gap: 8px; }
+  .crew-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-tint); border-radius: 30px; padding: 5px 14px 5px 5px; font-weight: 600; font-size: 13.5px; }
+  .crew-av { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family:'Archivo'; font-weight: 700; font-size: 12px; color: #fff; }
+  .notes-card { padding: 18px 20px; }
+  .notes-card ul { list-style: none; }
+  .notes-card li { font-size: 13.5px; color: var(--muted); padding: 6px 0 6px 22px; position: relative; line-height: 1.5; }
+  .notes-card li::before { content: "★"; position: absolute; left: 0; top: 6px; color: var(--red); font-size: 11px; }
+
+  /* ——— meals ——— */
   .day-card { overflow: hidden; }
-  .day-head {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 13px 18px; color: #fff;
-    background: linear-gradient(100deg, var(--navy), var(--navy-2));
-  }
-  .day-head.sat { background: linear-gradient(100deg, var(--red), #d83a52); }
-  .day-head .d { font-family: 'Fredoka'; font-weight: 700; font-size: 19px; }
-  .day-head .dn { font-size: 12px; font-weight: 700; opacity: .82; }
-  .meal { padding: 13px 18px; border-bottom: 1px dashed var(--line); }
+  .day-head { padding: 13px 18px; color: #fff; display: flex; align-items: center; justify-content: space-between; background: var(--navy); }
+  .day-head.sat { background: var(--red); }
+  .day-head .d { font-family:'Archivo'; font-weight: 700; font-size: 17px; }
+  .day-head .dn { font-size: 12px; font-weight: 600; opacity: .8; }
+  .meal { padding: 13px 18px; border-bottom: 1px solid var(--line); display: flex; gap: 13px; }
   .meal:last-child { border-bottom: none; }
-  .meal .when { display: flex; align-items: center; gap: 7px; font-family:'Fredoka'; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--red); }
-  .meal .when i { font-size: 15px; }
-  .meal .what { font-size: 14.5px; color: var(--muted); margin-top: 4px; line-height: 1.5; font-weight: 600; }
+  .meal i { font-size: 20px; color: var(--red); margin-top: 1px; flex-shrink: 0; }
+  .meal .when { font-family:'Archivo'; font-weight: 600; font-size: 12px; letter-spacing: .03em; text-transform: uppercase; color: var(--navy); }
+  .meal .what { font-size: 14.5px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
 
-  /* ——— packing list ——— */
-  .pack-bar-wrap { margin-bottom: 16px; }
-  .pp-track { height: 12px; background: #d7deee; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); }
-  .pp-fill { height: 100%; border-radius: 8px; width: 0;
-    background: repeating-linear-gradient(45deg, var(--red) 0 14px, #e23a52 14px 28px);
-    transition: width .35s ease; }
-  .pp-row { display: flex; align-items: center; justify-content: space-between; margin-top: 9px; }
-  .pp-text { font-family:'Fredoka'; font-weight: 600; font-size: 14px; color: var(--navy); }
-  .reset-btn { background: #fff; border: 1.5px solid var(--line); color: var(--muted); border-radius: 20px; padding: 9px 16px; font-family:'Fredoka'; font-weight: 600; font-size: 13px; cursor: pointer; min-height: 40px; display: inline-flex; align-items: center; gap: 6px; }
+  /* ——— packing ——— */
+  .pp-track { height: 11px; background: #d7deec; border-radius: 7px; overflow: hidden; border: 1px solid var(--line); }
+  .pp-fill { height: 100%; border-radius: 7px; width: 0; background: var(--red); transition: width .35s ease; }
+  .pp-row { display: flex; align-items: center; justify-content: space-between; margin: 9px 0 18px; }
+  .pp-text { font-family:'Archivo'; font-weight: 600; font-size: 13.5px; color: var(--navy); }
+  .reset-btn { background: #fff; border: 1.5px solid var(--line); color: var(--muted); border-radius: 18px; padding: 8px 15px; font-family:'Archivo'; font-weight: 600; font-size: 12.5px; cursor: pointer; min-height: 38px; display: inline-flex; align-items: center; gap: 6px; }
   .reset-btn:active { transform: scale(.97); }
-
-  .pack-card { padding: 4px 18px 12px; margin-bottom: 14px; }
-  .pack-card h3 { display: flex; align-items: center; gap: 9px; font-family:'Fredoka'; font-weight: 700; font-size: 16px; padding: 16px 0 8px; }
-  .pack-card h3 i { font-size: 20px; }
-  .pc-red h3 { color: var(--red); } .pc-red h3 i { color: var(--red); }
-  .pc-navy h3 { color: var(--navy); } .pc-navy h3 i { color: var(--navy); }
-  .pc-gold h3 { color: #b07d10; } .pc-gold h3 i { color: var(--gold); }
-
-  .check-item { display: flex; align-items: center; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--line); cursor: pointer; user-select: none; min-height: 50px; }
+  .pack-card { padding: 4px 18px 12px; }
+  .pack-card h3 { font-family:'Archivo'; font-weight: 700; font-size: 15px; padding: 15px 0 6px; display: flex; align-items: center; gap: 9px; }
+  .pack-card h3 i { font-size: 19px; }
+  .pc-red h3, .pc-red h3 i { color: var(--red); }
+  .pc-navy h3, .pc-navy h3 i { color: var(--navy); }
+  .pc-gold h3 { color: #9a7414; } .pc-gold h3 i { color: var(--gold); }
+  .check-item { display: flex; align-items: center; gap: 13px; padding: 12px 0; border-bottom: 1px solid var(--line); cursor: pointer; user-select: none; min-height: 48px; }
   .check-item:last-child { border-bottom: none; }
-  .check-btn { width: 30px; height: 30px; border-radius: 9px; border: 2px solid var(--line); display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: #fff; transition: all .15s; }
-  .check-btn svg { width: 16px; height: 16px; fill: transparent; transition: fill .15s; }
-  .check-label { font-size: 16px; color: var(--ink); font-weight: 600; line-height: 1.35; }
-  .check-item.done .check-label { color: #aeb3c0; text-decoration: line-through; text-decoration-thickness: 2px; }
+  .check-btn { width: 28px; height: 28px; border-radius: 8px; border: 2px solid var(--line); display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: #fff; transition: all .15s; }
+  .check-btn svg { width: 15px; height: 15px; fill: transparent; transition: fill .15s; }
+  .check-label { font-size: 15.5px; color: var(--ink); font-weight: 500; line-height: 1.35; }
+  .check-item.done .check-label { color: #aab2c2; text-decoration: line-through; }
   .pc-red .check-item.done .check-btn { background: var(--red); border-color: var(--red); }
   .pc-navy .check-item.done .check-btn { background: var(--navy); border-color: var(--navy); }
   .pc-gold .check-item.done .check-btn { background: var(--gold); border-color: var(--gold); }
   .check-item.done .check-btn svg { fill: #fff; }
-  .pc-gold .check-item.done .check-btn svg { fill: var(--navy); }
 
-  /* ——— crew ——— */
-  .crew-wrap { display: flex; flex-wrap: wrap; gap: 9px; }
-  .crew-chip { display: inline-flex; align-items: center; gap: 9px; background: var(--white); border: 1px solid var(--line); border-radius: 40px; padding: 7px 16px 7px 7px; font-family:'Fredoka'; font-weight: 600; font-size: 15px; color: var(--ink); box-shadow: 0 3px 9px rgba(26,34,56,.05); }
-  .crew-av { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family:'Fredoka'; font-weight: 700; font-size: 15px; color: #fff; }
+  .foot { text-align: center; margin-top: 30px; font-size: 12px; color: var(--faint); }
 
-  /* ——— notes ——— */
-  .notes { padding: 22px 20px; background: linear-gradient(160deg, #fff, #e6ecf9); }
-  .notes h2 { font-family: 'Fredoka'; font-weight: 700; font-size: 21px; color: var(--navy); margin-bottom: 12px; }
-  .notes ul { list-style: none; }
-  .notes li { font-size: 14.5px; color: var(--muted); padding: 8px 0 8px 28px; position: relative; line-height: 1.5; font-weight: 600; }
-  .notes li::before { content: "★"; position: absolute; left: 0; top: 7px; color: var(--red); font-size: 14px; }
-
-  .footer { text-align: center; margin-top: 36px; }
-  .footer .stars { color: var(--gold); letter-spacing: 6px; font-size: 18px; }
-  .footer .ft { font-family:'Pacifico', cursive; color: var(--navy); font-size: 19px; margin-top: 8px; }
-  .footer .meta { font-size: 12px; color: var(--muted); margin-top: 6px; font-weight: 600; }
-
-  @media (min-width: 540px) {
-    h1 { font-size: 48px; } h1 .l2 { font-size: 52px; }
-    .pack-grid-2 { /* keep single column for clarity */ }
-  }
+  @media (max-width: 360px) { .cd-num { font-size: 24px; } .wx-day .ico { font-size: 24px; } }
 </style>
 </head>
 <body>
 <div id="starfall" aria-hidden="true"></div>
-<div class="flag-bar"><span class="r"></span><span class="w"></span><span class="b"></span><span class="w"></span><span class="r"></span><span class="w"></span><span class="b"></span></div>
-<div class="wrap">
 
-  <!-- ——————————— hero ——————————— -->
-  <div class="hero">
-    <div class="fw fw1"><i class="ph-fill ph-firework"></i></div>
-    <div class="fw fw2"><i class="ph-fill ph-firework"></i></div>
-    <div class="fw fw3"><i class="ph-fill ph-star"></i></div>
-    <span class="kicker"><i class="ph-fill ph-tent"></i> red, white &amp; the great outdoors</span>
-    <div class="stars-line">★ ★ ★ ★ ★</div>
-    <h1><span class="l1">FOURTH OF JULY</span><span class="script l2">camping weekend</span></h1>
-    <div class="dates">
-      <span>fri jul 3</span><span class="dot"></span><span>sun jul 5, 2026</span><span class="dot"></span><span>9 of us</span>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="flag-chip"><i class="ph ph-tent"></i></div>
+      <div>
+        <h1>Fourth of July</h1>
+        <div class="sub">camping weekend · 9 of us</div>
+      </div>
     </div>
-    <div class="countdown" id="countdown">
-      <div class="cd-cell"><div class="cd-num" id="cd-days">–</div><div class="cd-lbl">days</div></div>
-      <div class="cd-cell"><div class="cd-num" id="cd-hours">–</div><div class="cd-lbl">hrs</div></div>
-      <div class="cd-cell"><div class="cd-num" id="cd-mins">–</div><div class="cd-lbl">min</div></div>
-      <div class="cd-cell"><div class="cd-num" id="cd-secs">–</div><div class="cd-lbl">sec</div></div>
-    </div>
+    <nav class="tabbar" role="tablist">
+      <button class="tab active" data-tab="weekend" role="tab">The Weekend</button>
+      <button class="tab" data-tab="meals" role="tab">Meals</button>
+      <button class="tab" data-tab="packing" role="tab">Packing</button>
+    </nav>
   </div>
+</header>
 
-  <!-- ——————————— the spot ——————————— -->
-  <section>
-    <div class="sec-head">
-      <div class="sec-icon ic-navy"><i class="ph-fill ph-map-pin"></i></div>
-      <div><h2>the spot</h2><div class="sub">where we're pitching tents</div></div>
-    </div>
-    <div class="card spot">
-      <div class="spot-name" id="spot-name">9812 Ranch Road</div>
-      <div class="spot-addr" id="spot-addr">home base for the weekend — punch it into maps before you lose signal</div>
-      <div class="spot-pills">
-        <span class="pill pill-navy">tent camping</span>
-        <span class="pill pill-red">the ranch</span>
+<main>
+
+  <!-- ——————————— TAB 1: THE WEEKEND ——————————— -->
+  <section class="panel active" id="tab-weekend">
+    <div class="stack">
+
+      <div class="card count-card">
+        <div class="when">Friday, July 3 → Sunday, July 5, 2026</div>
+        <div class="countdown" id="countdown">
+          <div class="cd-cell"><div class="cd-num" id="cd-days">–</div><div class="cd-lbl">days</div></div>
+          <div class="cd-cell"><div class="cd-num" id="cd-hours">–</div><div class="cd-lbl">hrs</div></div>
+          <div class="cd-cell"><div class="cd-num" id="cd-mins">–</div><div class="cd-lbl">min</div></div>
+          <div class="cd-cell"><div class="cd-num" id="cd-secs">–</div><div class="cd-lbl">sec</div></div>
+        </div>
       </div>
-      <a class="map-btn" id="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=9812%20Ranch%20Road" target="_blank" rel="noopener"><i class="ph-fill ph-navigation-arrow"></i> get directions</a>
-      <div class="info-stack">
-        <div class="info-chip"><i class="ph-fill ph-clock"></i><div><div class="lbl">arrival</div><div class="val">roll in fri before dark — way easier to set up tents in daylight</div></div></div>
-        <div class="info-chip"><i class="ph-fill ph-car-profile"></i><div><div class="lbl">carpools</div><div class="val">sort rides in the group chat — fewer cars = easier parking</div></div></div>
-        <div class="info-chip"><i class="ph-fill ph-wifi-slash"></i><div><div class="lbl">signal</div><div class="val">assume spotty service — screenshot directions before you leave town</div></div></div>
+
+      <div>
+        <div class="block-label">Weekend Forecast</div>
+        <div class="card" id="wx"></div>
       </div>
+
+      <div>
+        <div class="block-label">The Spot</div>
+        <div class="card addr-card">
+          <div class="addr">9812 Ranch Road</div>
+          <div class="addr-sub">home base for the weekend — save it to your maps before you lose signal</div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=9812%20Ranch%20Road" target="_blank" rel="noopener"><i class="ph ph-navigation-arrow"></i> Get Directions</a>
+          <div class="logi">
+            <div class="logi-row"><i class="ph ph-clock"></i><div><b>Arrival</b><span>roll in Friday before dark — easier to set up tents in daylight</span></div></div>
+            <div class="logi-row"><i class="ph ph-car-profile"></i><div><b>Carpools</b><span>sort rides in the group chat — fewer cars, easier parking</span></div></div>
+            <div class="logi-row"><i class="ph ph-wifi-slash"></i><div><b>Signal</b><span>assume spotty service — screenshot directions before you head out</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="block-label">The Crew</div>
+        <div class="crew" id="crew"></div>
+      </div>
+
+      <div>
+        <div class="block-label">Good to Know</div>
+        <div class="card notes-card">
+          <ul>
+            <li>leave no trace — pack out everything we bring in, douse the fire fully before bed</li>
+            <li>check the campground's fire + firework rules before the 4th; burn bans vary by site</li>
+            <li>plan a gallon of water per person per day — it goes fast in July heat</li>
+            <li>assign a cooler captain so the ice doesn't melt by Saturday</li>
+            <li>charge everything Friday morning — power's a luxury out there</li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- ——————————— meal plan ——————————— -->
-  <section>
-    <div class="sec-head">
-      <div class="sec-icon ic-red"><i class="ph-fill ph-hamburger"></i></div>
-      <div><h2>meal plan</h2><div class="sub">draft cookout menu — send yours, i'll swap it</div></div>
-    </div>
-    <div class="meal-stack">
+  <!-- ——————————— TAB 2: MEALS ——————————— -->
+  <section class="panel" id="tab-meals">
+    <div class="stack">
 
       <div class="card day-card">
-        <div class="day-head"><span class="d">friday</span><span class="dn">jul 3 · arrival</span></div>
-        <div class="meal"><div class="when"><i class="ph-fill ph-fire"></i> dinner</div><div class="what">burgers &amp; dogs on the grill, chips, watermelon — easy first night</div></div>
-        <div class="meal"><div class="when"><i class="ph-fill ph-campfire"></i> late night</div><div class="what">s'mores around the fire 🔥</div></div>
+        <div class="day-head"><span class="d">Friday</span><span class="dn">July 3</span></div>
+        <div class="meal"><i class="ph ph-fire"></i><div><div class="when">Dinner</div><div class="what">BBQ chicken thighs, fries, grilled zucchini + pineapple</div></div></div>
       </div>
 
       <div class="card day-card">
-        <div class="day-head sat"><span class="d">saturday</span><span class="dn">jul 4 · the big day 🎆</span></div>
-        <div class="meal"><div class="when"><i class="ph-fill ph-sun-horizon"></i> breakfast</div><div class="what">foil-packet breakfast scrambles + coffee on the camp stove</div></div>
-        <div class="meal"><div class="when"><i class="ph-fill ph-bread"></i> lunch</div><div class="what">build-your-own sandwiches + fruit — keep it light for the heat</div></div>
-        <div class="meal"><div class="when"><i class="ph-fill ph-fire"></i> dinner</div><div class="what">4th of july cookout — bbq chicken, corn on the cob, pasta salad, red + blue berries</div></div>
+        <div class="day-head sat"><span class="d">Saturday</span><span class="dn">July 4</span></div>
+        <div class="meal"><i class="ph ph-sun-horizon"></i><div><div class="when">Breakfast</div><div class="what">breakfast tacos</div></div></div>
+        <div class="meal"><i class="ph ph-hamburger"></i><div><div class="when">Early Afternoon</div><div class="what">burgers, brats, coleslaw, pasta salad, chips, watermelon</div></div></div>
+        <div class="meal"><i class="ph ph-campfire"></i><div><div class="when">Evening</div><div class="what">s'mores, ice cream sandwiches + popsicles — sammies if anyone's still hungry</div></div></div>
       </div>
 
       <div class="card day-card">
-        <div class="day-head"><span class="d">sunday</span><span class="dn">jul 5 · pack out</span></div>
-        <div class="meal"><div class="when"><i class="ph-fill ph-coffee"></i> breakfast</div><div class="what">pancakes + bacon, finish the coffee, use up leftovers before we break camp</div></div>
-        <div class="meal"><div class="when"><i class="ph-fill ph-shopping-bag"></i> road snacks</div><div class="what">trail mix, jerky, whatever's left in the cooler</div></div>
+        <div class="day-head"><span class="d">Sunday</span><span class="dn">July 5</span></div>
+        <div class="meal"><i class="ph ph-coffee"></i><div><div class="when">Breakfast</div><div class="what">pancakes + bacon</div></div></div>
+        <div class="meal"><i class="ph ph-bread"></i><div><div class="when">Lunch</div><div class="what">sandwiches</div></div></div>
       </div>
 
     </div>
   </section>
 
-  <!-- ——————————— packing list ——————————— -->
-  <section>
-    <div class="sec-head">
-      <div class="sec-icon ic-gold"><i class="ph-fill ph-backpack"></i></div>
-      <div><h2>packing list</h2><div class="sub">tap to check off — saves on your phone</div></div>
+  <!-- ——————————— TAB 3: PACKING ——————————— -->
+  <section class="panel" id="tab-packing">
+    <div class="pp-track"><div class="pp-fill" id="pp-fill"></div></div>
+    <div class="pp-row">
+      <span class="pp-text" id="pp-text">0 of 0 packed</span>
+      <button class="reset-btn" id="reset-btn"><i class="ph ph-arrow-counter-clockwise"></i> Reset</button>
     </div>
 
-    <div class="pack-bar-wrap">
-      <div class="pp-track"><div class="pp-fill" id="pp-fill"></div></div>
-      <div class="pp-row">
-        <span class="pp-text" id="pp-text">0 of 0 packed</span>
-        <button class="reset-btn" id="reset-btn"><i class="ph-fill ph-arrow-counter-clockwise"></i> reset</button>
+    <div class="stack">
+      <div class="card pack-card pc-red">
+        <h3><i class="ph ph-user-circle"></i> Everyone Brings</h3>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sleeping bag + pillow</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sleeping pad / air mattress</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">clothes + warm layer for night</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">swimsuit + towel</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">red/white/blue outfit for the 4th</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">toiletries + meds</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">water bottle</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">headlamp / flashlight</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">phone + battery pack</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">camp chair</span></div>
+      </div>
+
+      <div class="card pack-card pc-navy">
+        <h3><i class="ph ph-tent"></i> Group Gear</h3>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">tents + stakes</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">coolers + ice</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">grill / camp stove + propane</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">firewood + lighter / matches</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">cooking pot, pan + utensils</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">plates, cups, cutlery, napkins</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">trash + recycling bags</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">bluetooth speaker</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">canopy / shade tent</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">lawn games (cornhole, spikeball)</span></div>
+      </div>
+
+      <div class="card pack-card pc-gold">
+        <h3><i class="ph ph-sun"></i> Don't Forget</h3>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sunscreen</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">bug spray</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">first-aid kit</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">cash for firewood / site fees</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sunglasses + hat</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sparklers + glow sticks</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">paper towels + dish soap</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">camera</span></div>
       </div>
     </div>
-
-    <div class="card pack-card pc-red">
-      <h3><i class="ph-fill ph-user-circle"></i> everyone brings</h3>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sleeping bag + pillow</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sleeping pad / air mattress</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">clothes + warm layer for night</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">swimsuit + towel</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">red/white/blue fit for the 4th 🇺🇸</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">toiletries + meds</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">water bottle</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">headlamp / flashlight</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">phone + battery pack</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">camp chair</span></div>
-    </div>
-
-    <div class="card pack-card pc-navy">
-      <h3><i class="ph-fill ph-tent"></i> group gear (claim one!)</h3>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">tents + stakes</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">coolers + ice</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">grill / camp stove + propane</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">firewood + lighter / matches</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">cooking pot, pan + utensils</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">plates, cups, cutlery, napkins</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">trash + recycling bags</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">bluetooth speaker</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">canopy / shade tent</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">lawn games (cornhole, spikeball)</span></div>
-    </div>
-
-    <div class="card pack-card pc-gold">
-      <h3><i class="ph-fill ph-sun"></i> don't-forget extras</h3>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sunscreen (reapply!)</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">bug spray</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">first-aid kit</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">extra cash for firewood / fees</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sunglasses + hat</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sparklers + glow sticks ✨</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">paper towels + dish soap</span></div>
-      <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">camera / disposable cam</span></div>
-    </div>
   </section>
 
-  <!-- ——————————— crew ——————————— -->
-  <section>
-    <div class="sec-head">
-      <div class="sec-icon ic-navy"><i class="ph-fill ph-users-three"></i></div>
-      <div><h2>the crew</h2><div class="sub">9 deep this weekend</div></div>
-    </div>
-    <div class="crew-wrap" id="crew-wrap"></div>
-  </section>
+  <div class="foot">9812 Ranch Road · July 3–5, 2026</div>
 
-  <!-- ——————————— notes ——————————— -->
-  <section>
-    <div class="card notes">
-      <h2>good to know</h2>
-      <ul>
-        <li>leave no trace — pack out everything we bring in, douse the fire fully before bed</li>
-        <li>check the campground's fire + firework rules before the 4th — burn bans vary by site</li>
-        <li>plan a gallon of water per person per day — it goes fast in july heat</li>
-        <li>assign a "cooler captain" so the ice doesn't melt by saturday</li>
-        <li>charge everything friday morning — power's a luxury out there</li>
-      </ul>
-    </div>
-  </section>
-
-  <div class="footer">
-    <div class="stars">★ ★ ★</div>
-    <div class="ft">happy 4th, see you at camp!</div>
-    <div class="meta">made for the crew · last updated june 2026</div>
-  </div>
-
-</div>
+</main>
 
 <script>
-  // ——— falling stars (varying size + color, more on scroll) ———
+  // ——— falling stars (subtle) ———
   (function(){
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const layer = document.getElementById('starfall');
-    const COLORS = ['#c8102e','#0a2351','#f4b942','#ffffff','#7fb0ff','#e23a52','#f6cf6a'];
-    const GLYPHS = ['★','✦','✸','✷'];
-    function spawn() {
+    const COLORS = ['#ffffff','#0a3161','#b22234','#c79a2e'];
+    function spawn(){
       if (document.hidden) return;
       const s = document.createElement('span');
-      s.className = 'falling-star';
-      s.textContent = GLYPHS[(Math.random()*GLYPHS.length)|0];
-      const size = 9 + Math.random()*24;          // varying sizes
-      const dur  = 5 + Math.random()*7;
-      const op   = 0.25 + Math.random()*0.45;
-      const spin = (Math.random()*760 - 380) + 'deg';
+      s.className = 'falling-star'; s.textContent = '★';
+      const size = 7 + Math.random()*12, dur = 7 + Math.random()*6, op = 0.16 + Math.random()*0.26;
       s.style.left = (Math.random()*100) + 'vw';
       s.style.fontSize = size + 'px';
-      s.style.color = COLORS[(Math.random()*COLORS.length)|0]; // varying colors
+      s.style.color = COLORS[(Math.random()*COLORS.length)|0];
       s.style.setProperty('--op', op);
-      s.style.setProperty('--spin', spin);
+      s.style.setProperty('--spin', (Math.random()*620-310)+'deg');
       s.style.animation = `fall ${dur}s linear forwards`;
       layer.appendChild(s);
-      setTimeout(() => s.remove(), dur*1000 + 250);
+      setTimeout(()=>s.remove(), dur*1000+250);
     }
-    setInterval(spawn, 360);                       // gentle ambient drift
-    for (let i=0;i<7;i++) setTimeout(spawn, i*140); // opening sprinkle
-    // extra bursts while scrolling
+    setInterval(spawn, 520);
+    for (let i=0;i<5;i++) setTimeout(spawn, i*200);
     let lastY = window.scrollY, ticking = false;
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', ()=>{
       if (ticking) return; ticking = true;
-      requestAnimationFrame(() => {
-        if (Math.abs(window.scrollY - lastY) > 36) { spawn(); spawn(); lastY = window.scrollY; }
-        ticking = false;
-      });
-    }, { passive: true });
+      requestAnimationFrame(()=>{ if (Math.abs(window.scrollY-lastY)>50){ spawn(); lastY = window.scrollY; } ticking = false; });
+    }, { passive:true });
   })();
 
-  // ——— crew avatars (red / white-navy / blue rotation) ———
-  const crew = ["Chad","Alexa","Ali","Cheech","Mike","Ali","Jack","Emme","Me"];
-  const avColors = ["#c8102e","#0a2351","#f4b942","#c8102e","#0a2351","#f4b942","#c8102e","#0a2351","#f4b942"];
-  const crewWrap = document.getElementById("crew-wrap");
-  crew.forEach((name, i) => {
-    const chip = document.createElement("div");
-    chip.className = "crew-chip";
-    const c = avColors[i % avColors.length];
-    const textColor = c === "#f4b942" ? "#0a2351" : "#fff";
-    chip.innerHTML = `<span class="crew-av" style="background:${c};color:${textColor}">${name[0]}</span>${name}`;
-    crewWrap.appendChild(chip);
-  });
+  // ——— tabs ———
+  const tabs = [...document.querySelectorAll('.tab')];
+  function show(name){
+    tabs.forEach(t => { const on = t.dataset.tab===name; t.classList.toggle('active', on); t.setAttribute('aria-selected', on); });
+    document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'tab-'+name));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
 
-  // ——— countdown to fri jul 3, 2026, 12pm ———
+  // ——— crew ———
+  const crew = ["Chad","Alexa","Ali","Cheech","Mike","Ali","Jack","Emme","Me"];
+  const avc = ["#b22234","#0a3161","#c79a2e"];
+  const cw = document.getElementById('crew');
+  crew.forEach((n,i)=>{ const c=document.createElement('div'); c.className='crew-chip';
+    c.innerHTML=`<span class="crew-av" style="background:${avc[i%3]}">${n[0]}</span>${n}`; cw.appendChild(c); });
+
+  // ——— countdown ———
   const target = new Date("2026-07-03T12:00:00").getTime();
-  function tick() {
-    const diff = target - Date.now();
-    const cd = document.getElementById("countdown");
-    if (diff <= 0) { cd.innerHTML = '<div class="cd-done">🎆 it\'s go time — see you at camp! 🎆</div>'; return; }
-    const d = Math.floor(diff/86400000), h = Math.floor((diff%86400000)/3600000),
-          m = Math.floor((diff%3600000)/60000), s = Math.floor((diff%60000)/1000);
-    document.getElementById("cd-days").textContent = d;
-    document.getElementById("cd-hours").textContent = h;
-    document.getElementById("cd-mins").textContent = m;
-    document.getElementById("cd-secs").textContent = s;
+  function tick(){
+    const diff = target - Date.now(), cd = document.getElementById('countdown');
+    if (diff <= 0){ cd.innerHTML = '<div class="cd-done">It\'s go time — see you at camp</div>'; return; }
+    const d=Math.floor(diff/864e5), h=Math.floor(diff%864e5/36e5), m=Math.floor(diff%36e5/6e4), s=Math.floor(diff%6e4/1e3);
+    cd.querySelector('#cd-days').textContent=d; cd.querySelector('#cd-hours').textContent=h;
+    cd.querySelector('#cd-mins').textContent=m; cd.querySelector('#cd-secs').textContent=s;
   }
   tick(); setInterval(tick, 1000);
 
-  // ——— packing list w/ localStorage ———
-  const STORE = "july4camp.packing.v1";
+  // ——— packing list ———
+  const STORE = "july4camp.packing.v2";
   const items = document.querySelectorAll(".check-item");
-  let saved = {};
-  try { saved = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch(e){}
+  let saved = {}; try { saved = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch(e){}
   const keyFor = el => el.querySelector(".check-label").textContent.trim();
-  function updateProgress() {
-    const total = items.length; let done = 0;
-    items.forEach(el => { if (el.classList.contains("done")) done++; });
-    const pct = total ? Math.round(done/total*100) : 0;
-    document.getElementById("pp-fill").style.width = pct + "%";
-    document.getElementById("pp-text").textContent = `${done} of ${total} packed · ${pct}%`;
+  function updateProgress(){
+    let done=0; items.forEach(el=>{ if(el.classList.contains('done')) done++; });
+    const pct = items.length ? Math.round(done/items.length*100) : 0;
+    document.getElementById('pp-fill').style.width = pct+'%';
+    document.getElementById('pp-text').textContent = `${done} of ${items.length} packed · ${pct}%`;
   }
-  items.forEach(el => {
-    if (saved[keyFor(el)]) el.classList.add("done");
-    el.addEventListener("click", () => {
-      el.classList.toggle("done");
-      saved[keyFor(el)] = el.classList.contains("done");
-      localStorage.setItem(STORE, JSON.stringify(saved));
-      updateProgress();
-    });
-  });
+  items.forEach(el=>{ if(saved[keyFor(el)]) el.classList.add('done');
+    el.addEventListener('click', ()=>{ el.classList.toggle('done'); saved[keyFor(el)]=el.classList.contains('done');
+      localStorage.setItem(STORE, JSON.stringify(saved)); updateProgress(); }); });
   updateProgress();
-  document.getElementById("reset-btn").addEventListener("click", () => {
-    items.forEach(el => el.classList.remove("done"));
-    saved = {}; localStorage.removeItem(STORE); updateProgress();
-  });
+  document.getElementById('reset-btn').addEventListener('click', ()=>{
+    items.forEach(el=>el.classList.remove('done')); saved={}; localStorage.removeItem(STORE); updateProgress(); });
 
-  // ——— maps button guard ———
-  document.getElementById("map-btn").addEventListener("click", (e) => {
-    const href = e.currentTarget.getAttribute("href");
-    if (!href || href === "#") { e.preventDefault(); alert("add the campground address first — then this opens directions"); }
-  });
+  // ——— weather (Open-Meteo) ———
+  // set SPOT.town to the nearest town + state and the live forecast fills in automatically.
+  const SPOT = { town: "", lat: null, lon: null };
+  const TRIP = { start: "2026-07-03", end: "2026-07-05" };
+  const WX = document.getElementById('wx');
+  const WCODE = c => {
+    if (c===0) return ['ph-sun','sun','Clear'];
+    if (c<=2)  return ['ph-cloud-sun','sun','Partly sunny'];
+    if (c===3) return ['ph-cloud','','Cloudy'];
+    if (c<=48) return ['ph-cloud-fog','','Fog'];
+    if (c<=57) return ['ph-cloud-rain','','Drizzle'];
+    if (c<=67) return ['ph-cloud-rain','','Rain'];
+    if (c<=77) return ['ph-snowflake','','Snow'];
+    if (c<=82) return ['ph-cloud-rain','','Showers'];
+    if (c<=86) return ['ph-snowflake','','Snow'];
+    return ['ph-cloud-lightning','','Storms'];
+  };
+  const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  function wxState(icon, text){ WX.classList.remove('wx-grid'); WX.innerHTML = `<div class="wx-state"><i class="ph ${icon}"></i><div>${text}</div></div>`; }
+  async function loadWeather(){
+    try {
+      if (!SPOT.lat && SPOT.town){
+        const g = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(SPOT.town)}&count=1&country=US`).then(r=>r.json());
+        if (g.results && g.results[0]){ SPOT.lat=g.results[0].latitude; SPOT.lon=g.results[0].longitude; }
+      }
+      if (!SPOT.lat){ wxState('ph-map-pin-line', "Once we lock the nearest town, the live July&nbsp;3–5 forecast shows up right here."); return; }
+      const u = `https://api.open-meteo.com/v1/forecast?latitude=${SPOT.lat}&longitude=${SPOT.lon}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&timezone=auto&start_date=${TRIP.start}&end_date=${TRIP.end}`;
+      const d = await fetch(u).then(r=>r.json());
+      if (!d.daily || !d.daily.time || !d.daily.time.length){ wxState('ph-calendar-dots', "Forecast isn't out this far yet — it'll fill in as we get closer to the trip."); return; }
+      WX.classList.add('wx-grid'); WX.innerHTML = '';
+      d.daily.time.forEach((iso,i)=>{
+        const dt = new Date(iso+'T12:00:00');
+        const [ic, cls] = WCODE(d.daily.weather_code[i]);
+        const hi = Math.round(d.daily.temperature_2m_max[i]);
+        const lo = Math.round(d.daily.temperature_2m_min[i]);
+        const pop = d.daily.precipitation_probability_max[i];
+        const cell = document.createElement('div'); cell.className = 'wx-day';
+        cell.innerHTML = `<div class="dow">${DOW[dt.getDay()]}</div><div class="date">${dt.getMonth()+1}/${dt.getDate()}</div>`+
+          `<div class="ico ${cls}"><i class="ph ${ic}"></i></div><div class="hi">${hi}°</div><div class="lo">${lo}°</div>`+
+          (pop!=null ? `<div class="pop">${pop}% rain</div>` : '');
+        WX.appendChild(cell);
+      });
+    } catch(e){ wxState('ph-wifi-slash', "Couldn't load the forecast right now — check back when you've got signal."); }
+  }
+  loadWeather();
 </script>
 </body>
 </html>
