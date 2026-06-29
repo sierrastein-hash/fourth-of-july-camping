@@ -41,6 +41,17 @@
     overflow-x: hidden;
   }
 
+  /* falling stars overlay */
+  #starfall { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 60; }
+  .falling-star { position: absolute; top: -44px; line-height: 1; will-change: transform, opacity; text-shadow: 0 0 6px rgba(0,0,0,.06); }
+  @keyframes fall {
+    0%   { transform: translateY(-44px) rotate(0deg); opacity: 0; }
+    12%  { opacity: var(--op); }
+    88%  { opacity: var(--op); }
+    100% { transform: translateY(112vh) rotate(var(--spin)); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { #starfall { display: none; } }
+
   /* stars-and-stripes top bar */
   .flag-bar { height: 8px; display: flex; }
   .flag-bar span { flex: 1; }
@@ -240,6 +251,7 @@
 </style>
 </head>
 <body>
+<div id="starfall" aria-hidden="true"></div>
 <div class="flag-bar"><span class="r"></span><span class="w"></span><span class="b"></span><span class="w"></span><span class="r"></span><span class="w"></span><span class="b"></span></div>
 <div class="wrap">
 
@@ -269,13 +281,13 @@
       <div><h2>the spot</h2><div class="sub">where we're pitching tents</div></div>
     </div>
     <div class="card spot">
-      <div class="spot-name" id="spot-name"><span class="ph-note">add the campground name →</span></div>
-      <div class="spot-addr" id="spot-addr"><span class="ph-note">drop the full address (or a maps link) and i'll wire up this button</span></div>
+      <div class="spot-name" id="spot-name">9812 Ranch Road</div>
+      <div class="spot-addr" id="spot-addr">home base for the weekend — punch it into maps before you lose signal</div>
       <div class="spot-pills">
-        <span class="pill pill-navy">campsite tbd</span>
-        <span class="pill pill-red">tents</span>
+        <span class="pill pill-navy">tent camping</span>
+        <span class="pill pill-red">the ranch</span>
       </div>
-      <a class="map-btn" id="map-btn" href="#" target="_blank" rel="noopener"><i class="ph-fill ph-navigation-arrow"></i> get directions</a>
+      <a class="map-btn" id="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=9812%20Ranch%20Road" target="_blank" rel="noopener"><i class="ph-fill ph-navigation-arrow"></i> get directions</a>
       <div class="info-stack">
         <div class="info-chip"><i class="ph-fill ph-clock"></i><div><div class="lbl">arrival</div><div class="val">roll in fri before dark — way easier to set up tents in daylight</div></div></div>
         <div class="info-chip"><i class="ph-fill ph-car-profile"></i><div><div class="lbl">carpools</div><div class="val">sort rides in the group chat — fewer cars = easier parking</div></div></div>
@@ -402,6 +414,44 @@
 </div>
 
 <script>
+  // ——— falling stars (varying size + color, more on scroll) ———
+  (function(){
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    const layer = document.getElementById('starfall');
+    const COLORS = ['#c8102e','#0a2351','#f4b942','#ffffff','#7fb0ff','#e23a52','#f6cf6a'];
+    const GLYPHS = ['★','✦','✸','✷'];
+    function spawn() {
+      if (document.hidden) return;
+      const s = document.createElement('span');
+      s.className = 'falling-star';
+      s.textContent = GLYPHS[(Math.random()*GLYPHS.length)|0];
+      const size = 9 + Math.random()*24;          // varying sizes
+      const dur  = 5 + Math.random()*7;
+      const op   = 0.25 + Math.random()*0.45;
+      const spin = (Math.random()*760 - 380) + 'deg';
+      s.style.left = (Math.random()*100) + 'vw';
+      s.style.fontSize = size + 'px';
+      s.style.color = COLORS[(Math.random()*COLORS.length)|0]; // varying colors
+      s.style.setProperty('--op', op);
+      s.style.setProperty('--spin', spin);
+      s.style.animation = `fall ${dur}s linear forwards`;
+      layer.appendChild(s);
+      setTimeout(() => s.remove(), dur*1000 + 250);
+    }
+    setInterval(spawn, 360);                       // gentle ambient drift
+    for (let i=0;i<7;i++) setTimeout(spawn, i*140); // opening sprinkle
+    // extra bursts while scrolling
+    let lastY = window.scrollY, ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(() => {
+        if (Math.abs(window.scrollY - lastY) > 36) { spawn(); spawn(); lastY = window.scrollY; }
+        ticking = false;
+      });
+    }, { passive: true });
+  })();
+
   // ——— crew avatars (red / white-navy / blue rotation) ———
   const crew = ["Chad","Alexa","Ali","Cheech","Mike","Ali","Jack","Emme","Me"];
   const avColors = ["#c8102e","#0a2351","#f4b942","#c8102e","#0a2351","#f4b942","#c8102e","#0a2351","#f4b942"];
