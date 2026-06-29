@@ -230,11 +230,11 @@
       layer.appendChild(s);
       setTimeout(()=>s.remove(), dur*1000+260);
     }
-    setInterval(spawn, 190);
-    for (let i=0;i<18;i++) setTimeout(spawn, i*120);
+    setInterval(spawn, 620);
+    for (let i=0;i<5;i++) setTimeout(spawn, i*220);
     let lastY = window.scrollY, ticking = false;
     window.addEventListener('scroll', ()=>{ if(ticking) return; ticking=true;
-      requestAnimationFrame(()=>{ if(Math.abs(window.scrollY-lastY)>32){ spawn(); spawn(); lastY=window.scrollY; } ticking=false; }); }, {passive:true});
+      requestAnimationFrame(()=>{ if(Math.abs(window.scrollY-lastY)>60){ spawn(); lastY=window.scrollY; } ticking=false; }); }, {passive:true});
   })();
 
   // ——— cute graphic: fireworks over a tent ———
