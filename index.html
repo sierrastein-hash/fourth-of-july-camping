@@ -3,29 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0a3161">
+<meta name="theme-color" content="#2c4257">
 <title>Fourth of July · Camping Weekend</title>
-<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css" />
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/light/style.css" />
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
 
   :root {
-    --red: #b22234;  --red-dk: #8e1a2a;
-    --navy: #0a3161; --navy-2: #143d76;
-    --gold: #c79a2e;
-    --bg: #eef2f8;   --bg-tint: #e5ebf5;
-    --card: #ffffff;
-    --ink: #16233a;  --muted: #5a6477; --faint: #8a93a6;
-    --line: #dde3ee;
+    --bg: #ece3d0;        /* warm paper */
+    --paper: #faf6ec;     /* card */
+    --paper-2: #f3ecdb;   /* inset */
+    --ink: #2b2722;
+    --muted: #6f6757;
+    --faint: #a39a85;
+    --rust: #9f3d2c;  --rust-dk: #843022;
+    --navy: #2c4257;  --navy-dk: #213342;
+    --ochre: #bd8a30; --ochre-dk: #9a6f1f;
+    --line: #ddd1b8;  --line-dk: #cbbe9f;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html { -webkit-text-size-adjust: 100%; }
   body {
     font-family: 'Inter', sans-serif;
-    background:
-      radial-gradient(circle at 100% 0%, rgba(178,34,52,.05), transparent 36%),
-      radial-gradient(circle at 0% 100%, rgba(10,49,97,.06), transparent 38%),
-      var(--bg);
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(circle at 50% -10%, rgba(189,138,48,.07), transparent 45%),
+      radial-gradient(circle at 100% 100%, rgba(44,66,87,.05), transparent 40%);
     background-attachment: fixed;
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
@@ -36,134 +39,133 @@
   #starfall { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 5; }
   .falling-star { position: absolute; top: -40px; line-height: 1; will-change: transform, opacity; }
   @keyframes fall {
-    0%   { transform: translateY(-40px) rotate(0); opacity: 0; }
-    14%  { opacity: var(--op); }
-    86%  { opacity: var(--op); }
+    0% { transform: translateY(-40px) rotate(0); opacity: 0; }
+    16% { opacity: var(--op); } 84% { opacity: var(--op); }
     100% { transform: translateY(108vh) rotate(var(--spin)); opacity: 0; }
   }
   @media (prefers-reduced-motion: reduce) { #starfall { display: none; } }
 
   /* ——— sticky top bar + tabs ——— */
-  .topbar {
-    position: sticky; top: 0; z-index: 20;
-    background: rgba(238,242,248,.86); backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
-  }
-  .topbar-inner { max-width: 640px; margin: 0 auto; padding: 14px 18px 0; }
-  .brand { display: flex; align-items: center; gap: 12px; }
-  .flag-chip {
-    width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px;
-    background: linear-gradient(150deg, var(--red) 0 50%, var(--navy) 50% 100%);
-  }
-  .brand h1 { font-family: 'Archivo'; font-weight: 800; font-size: 21px; letter-spacing: -.01em; color: var(--navy); line-height: 1.1; }
-  .brand .sub { font-size: 12.5px; color: var(--muted); font-weight: 500; margin-top: 1px; }
+  .topbar { position: sticky; top: 0; z-index: 20; background: rgba(236,227,208,.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line-dk); }
+  .topbar-inner { max-width: 600px; margin: 0 auto; padding: 15px 20px 0; }
+  .brand { display: flex; align-items: center; gap: 13px; }
+  .emblem { width: 42px; height: 42px; flex-shrink: 0; }
+  .brand h1 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 23px; letter-spacing: .01em; color: var(--navy); line-height: 1.05; }
+  .brand .sub { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--rust); font-weight: 600; margin-top: 3px; }
 
-  .tabbar { display: flex; gap: 4px; margin-top: 12px; }
-  .tab {
-    flex: 1; appearance: none; border: none; background: transparent; cursor: pointer;
-    font-family: 'Archivo'; font-weight: 600; font-size: 14px; color: var(--faint);
-    padding: 11px 6px 13px; border-bottom: 2.5px solid transparent; transition: color .15s, border-color .15s;
-  }
-  .tab.active { color: var(--navy); border-bottom-color: var(--red); }
+  .tabbar { display: flex; gap: 6px; margin-top: 14px; }
+  .tab { flex: 1; appearance: none; border: none; background: transparent; cursor: pointer;
+    font-family: 'Inter'; font-weight: 600; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint);
+    padding: 10px 4px 13px; border-bottom: 2px solid transparent; transition: color .18s, border-color .18s; }
+  .tab.active { color: var(--navy); border-bottom-color: var(--rust); }
 
-  /* ——— panels ——— */
-  main { max-width: 640px; margin: 0 auto; padding: 22px 18px 56px; position: relative; z-index: 10; }
-  .panel { display: none; animation: fade .25s ease; }
+  /* ——— layout ——— */
+  main { max-width: 600px; margin: 0 auto; padding: 26px 20px 60px; position: relative; z-index: 10; }
+  .panel { display: none; animation: fade .28s ease; }
   .panel.active { display: block; }
   @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .stack { display: flex; flex-direction: column; gap: 26px; }
 
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 3px 12px rgba(22,35,58,.05); }
-  .block-label { font-family: 'Archivo'; font-weight: 700; font-size: 12px; letter-spacing: .07em; text-transform: uppercase; color: var(--red); margin-bottom: 11px; }
-  .stack { display: flex; flex-direction: column; gap: 18px; }
+  .card { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 2px 10px rgba(43,39,34,.04); }
+
+  .block-label { display: flex; align-items: center; gap: 10px; margin-bottom: 13px; }
+  .block-label span { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; font-weight: 600; color: var(--rust); }
+  .block-label::after { content: ""; flex: 1; height: 1px; background: var(--line-dk); }
 
   /* ——— countdown ——— */
-  .count-card { padding: 20px; text-align: center; background: linear-gradient(155deg, var(--navy-2), var(--navy)); border: none; color: #fff; }
-  .count-card .when { font-family:'Archivo'; font-weight: 600; font-size: 15px; color: rgba(255,255,255,.8); }
-  .countdown { display: flex; gap: 8px; justify-content: center; margin-top: 14px; }
-  .cd-cell { background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.16); border-radius: 12px; padding: 11px 4px; flex: 1; max-width: 80px; }
-  .cd-num { font-family:'Archivo'; font-weight: 800; font-size: 28px; line-height: 1; color: #fff; }
-  .cd-lbl { font-size: 10px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-top: 6px; }
-  .cd-done { font-family:'Archivo'; font-weight: 700; font-size: 18px; color: var(--gold); }
+  .count-card { padding: 24px 20px; text-align: center; border: none; position: relative;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-dk) 100%); color: #f3ecdb;
+    box-shadow: 0 6px 22px rgba(33,51,66,.22); }
+  .count-card::before { content: ""; position: absolute; inset: 7px; border: 1px solid rgba(243,236,219,.18); border-radius: 8px; pointer-events: none; }
+  .count-card .when { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 16px; color: rgba(243,236,219,.92); position: relative; }
+  .count-card .lead { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ochre); font-weight: 600; margin-bottom: 8px; position: relative; }
+  .countdown { display: flex; gap: 9px; justify-content: center; margin-top: 18px; position: relative; }
+  .cd-cell { flex: 1; max-width: 78px; padding: 6px 4px; }
+  .cd-num { font-family: 'DM Serif Display', serif; font-size: 34px; line-height: 1; color: #fff; }
+  .cd-lbl { font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(243,236,219,.6); margin-top: 7px; }
+  .cd-sep { align-self: flex-start; font-family: 'DM Serif Display', serif; font-size: 30px; color: rgba(243,236,219,.3); margin-top: -2px; }
+  .cd-done { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 19px; color: var(--ochre); position: relative; }
 
   /* ——— weather ——— */
-  .wx-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-  .wx-day { background: var(--bg-tint); border-radius: 13px; padding: 14px 8px; text-align: center; }
-  .wx-day .dow { font-family:'Archivo'; font-weight: 700; font-size: 13px; color: var(--navy); }
-  .wx-day .date { font-size: 11px; color: var(--faint); margin-bottom: 6px; }
-  .wx-day .ico { font-size: 28px; color: var(--navy-2); margin: 2px 0; }
-  .wx-day .ico.sun { color: var(--gold); }
-  .wx-day .hi { font-family:'Archivo'; font-weight: 700; font-size: 17px; color: var(--ink); }
+  .wx-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .wx-day { padding: 16px 8px; text-align: center; border-right: 1px solid var(--line); }
+  .wx-day:last-child { border-right: none; }
+  .wx-day .dow { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--navy); }
+  .wx-day .date { font-size: 10.5px; letter-spacing: .08em; color: var(--faint); margin-bottom: 8px; }
+  .wx-day .ico { font-size: 30px; color: var(--navy); margin: 2px 0 4px; }
+  .wx-day .ico.sun { color: var(--ochre); }
+  .wx-day .hi { font-family: 'DM Serif Display', serif; font-size: 19px; color: var(--ink); }
   .wx-day .lo { font-size: 12px; color: var(--muted); }
-  .wx-day .pop { font-size: 11px; color: var(--navy-2); margin-top: 4px; font-weight: 600; }
-  .wx-state { padding: 16px; display: flex; gap: 12px; align-items: center; color: var(--muted); font-size: 13.5px; line-height: 1.45; }
-  .wx-state i { font-size: 26px; color: var(--navy-2); flex-shrink: 0; }
-  .wx-note { font-size: 11.5px; color: var(--faint); margin-top: 10px; text-align: center; }
+  .wx-day .pop { font-size: 10.5px; color: var(--navy); margin-top: 5px; }
+  .wx-state { padding: 20px; display: flex; gap: 14px; align-items: center; color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+  .wx-state i { font-size: 28px; color: var(--navy); flex-shrink: 0; }
 
   /* ——— address ——— */
-  .addr-card { padding: 20px; }
-  .addr { font-family:'Archivo'; font-weight: 700; font-size: 20px; color: var(--navy); }
-  .addr-sub { font-size: 13.5px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
-  .map-btn {
-    display: flex; align-items: center; justify-content: center; gap: 9px; margin-top: 15px; width: 100%;
-    text-decoration: none; background: var(--red); color: #fff; font-family:'Archivo'; font-weight: 600; font-size: 15px;
-    padding: 14px; border-radius: 12px; min-height: 50px; box-shadow: 0 5px 14px rgba(178,34,52,.28);
-  }
-  .map-btn:active { transform: scale(.985); }
-  .logi { margin-top: 14px; display: flex; flex-direction: column; gap: 9px; }
-  .logi-row { display: flex; gap: 11px; align-items: flex-start; }
-  .logi-row i { font-size: 19px; color: var(--red); margin-top: 1px; flex-shrink: 0; }
-  .logi-row b { font-family:'Archivo'; font-weight: 600; font-size: 13.5px; color: var(--navy); display: block; }
+  .addr-card { padding: 22px; }
+  .addr { font-family: 'DM Serif Display', serif; font-size: 25px; color: var(--navy); line-height: 1.1; }
+  .addr-sub { font-size: 13.5px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+  .map-btn { display: flex; align-items: center; justify-content: center; gap: 9px; margin-top: 17px; width: 100%;
+    text-decoration: none; background: var(--rust); color: #faf6ec; font-weight: 600; font-size: 13.5px; letter-spacing: .03em;
+    padding: 14px; border-radius: 9px; min-height: 50px; transition: background .15s; }
+  .map-btn:active { background: var(--rust-dk); }
+  .map-btn i { font-size: 18px; }
+  .logi { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 13px; }
+  .logi-row { display: flex; gap: 13px; align-items: flex-start; }
+  .logi-row i { font-size: 21px; color: var(--ochre-dk); margin-top: 1px; flex-shrink: 0; }
+  .logi-row b { font-weight: 600; font-size: 13px; color: var(--navy); display: block; letter-spacing: .02em; }
   .logi-row span { font-size: 13px; color: var(--muted); line-height: 1.45; }
 
   /* ——— crew + notes ——— */
   .crew { display: flex; flex-wrap: wrap; gap: 8px; }
-  .crew-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-tint); border-radius: 30px; padding: 5px 14px 5px 5px; font-weight: 600; font-size: 13.5px; }
-  .crew-av { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family:'Archivo'; font-weight: 700; font-size: 12px; color: #fff; }
-  .notes-card { padding: 18px 20px; }
+  .crew-chip { display: inline-flex; align-items: center; gap: 9px; background: var(--paper); border: 1px solid var(--line); border-radius: 30px; padding: 5px 15px 5px 5px; font-weight: 500; font-size: 13.5px; }
+  .crew-av { width: 27px; height: 27px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 13px; color: #faf6ec; }
+  .notes-card { padding: 20px 22px; }
   .notes-card ul { list-style: none; }
-  .notes-card li { font-size: 13.5px; color: var(--muted); padding: 6px 0 6px 22px; position: relative; line-height: 1.5; }
-  .notes-card li::before { content: "★"; position: absolute; left: 0; top: 6px; color: var(--red); font-size: 11px; }
+  .notes-card li { font-size: 13.5px; color: var(--muted); padding: 7px 0 7px 24px; position: relative; line-height: 1.55; }
+  .notes-card li + li { border-top: 1px solid var(--line); }
+  .notes-card li::before { content: "✦"; position: absolute; left: 0; top: 7px; color: var(--ochre); font-size: 12px; }
 
   /* ——— meals ——— */
-  .day-card { overflow: hidden; }
-  .day-head { padding: 13px 18px; color: #fff; display: flex; align-items: center; justify-content: space-between; background: var(--navy); }
-  .day-head.sat { background: var(--red); }
-  .day-head .d { font-family:'Archivo'; font-weight: 700; font-size: 17px; }
-  .day-head .dn { font-size: 12px; font-weight: 600; opacity: .8; }
-  .meal { padding: 13px 18px; border-bottom: 1px solid var(--line); display: flex; gap: 13px; }
-  .meal:last-child { border-bottom: none; }
-  .meal i { font-size: 20px; color: var(--red); margin-top: 1px; flex-shrink: 0; }
-  .meal .when { font-family:'Archivo'; font-weight: 600; font-size: 12px; letter-spacing: .03em; text-transform: uppercase; color: var(--navy); }
-  .meal .what { font-size: 14.5px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+  .day-card { padding: 20px 22px; position: relative; overflow: hidden; }
+  .day-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--navy); }
+  .day-card.sat::before { background: var(--rust); }
+  .day-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px; }
+  .day-top .d { font-family: 'DM Serif Display', serif; font-size: 23px; color: var(--navy); }
+  .day-card.sat .day-top .d { color: var(--rust); }
+  .day-top .dn { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); font-weight: 600; }
+  .meal { padding: 14px 0; border-top: 1px solid var(--line); display: flex; gap: 14px; }
+  .meal:first-of-type { border-top: none; padding-top: 10px; }
+  .meal i { font-size: 22px; color: var(--ochre-dk); margin-top: 2px; flex-shrink: 0; }
+  .meal .when { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--navy); font-weight: 600; }
+  .meal .what { font-size: 14.5px; color: var(--muted); margin-top: 4px; line-height: 1.55; }
 
   /* ——— packing ——— */
-  .pp-track { height: 11px; background: #d7deec; border-radius: 7px; overflow: hidden; border: 1px solid var(--line); }
-  .pp-fill { height: 100%; border-radius: 7px; width: 0; background: var(--red); transition: width .35s ease; }
-  .pp-row { display: flex; align-items: center; justify-content: space-between; margin: 9px 0 18px; }
-  .pp-text { font-family:'Archivo'; font-weight: 600; font-size: 13.5px; color: var(--navy); }
-  .reset-btn { background: #fff; border: 1.5px solid var(--line); color: var(--muted); border-radius: 18px; padding: 8px 15px; font-family:'Archivo'; font-weight: 600; font-size: 12.5px; cursor: pointer; min-height: 38px; display: inline-flex; align-items: center; gap: 6px; }
-  .reset-btn:active { transform: scale(.97); }
-  .pack-card { padding: 4px 18px 12px; }
-  .pack-card h3 { font-family:'Archivo'; font-weight: 700; font-size: 15px; padding: 15px 0 6px; display: flex; align-items: center; gap: 9px; }
-  .pack-card h3 i { font-size: 19px; }
-  .pc-red h3, .pc-red h3 i { color: var(--red); }
-  .pc-navy h3, .pc-navy h3 i { color: var(--navy); }
-  .pc-gold h3 { color: #9a7414; } .pc-gold h3 i { color: var(--gold); }
-  .check-item { display: flex; align-items: center; gap: 13px; padding: 12px 0; border-bottom: 1px solid var(--line); cursor: pointer; user-select: none; min-height: 48px; }
-  .check-item:last-child { border-bottom: none; }
-  .check-btn { width: 28px; height: 28px; border-radius: 8px; border: 2px solid var(--line); display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: #fff; transition: all .15s; }
-  .check-btn svg { width: 15px; height: 15px; fill: transparent; transition: fill .15s; }
-  .check-label { font-size: 15.5px; color: var(--ink); font-weight: 500; line-height: 1.35; }
-  .check-item.done .check-label { color: #aab2c2; text-decoration: line-through; }
-  .pc-red .check-item.done .check-btn { background: var(--red); border-color: var(--red); }
+  .pp-track { height: 8px; background: var(--paper-2); border-radius: 6px; overflow: hidden; border: 1px solid var(--line); }
+  .pp-fill { height: 100%; border-radius: 6px; width: 0; background: var(--rust); transition: width .35s ease; }
+  .pp-row { display: flex; align-items: center; justify-content: space-between; margin: 11px 0 22px; }
+  .pp-text { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--navy); font-weight: 600; }
+  .reset-btn { background: transparent; border: 1px solid var(--line-dk); color: var(--muted); border-radius: 20px; padding: 8px 16px; font-family: inherit; font-weight: 600; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; min-height: 36px; display: inline-flex; align-items: center; gap: 7px; }
+  .reset-btn:active { background: var(--paper-2); }
+  .pack-card { padding: 6px 22px 14px; }
+  .pack-card h3 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 19px; padding: 17px 0 8px; display: flex; align-items: center; gap: 11px; }
+  .pack-card h3 i { font-size: 21px; }
+  .pc-rust h3 { color: var(--rust); } .pc-rust h3 i { color: var(--rust); }
+  .pc-navy h3 { color: var(--navy); } .pc-navy h3 i { color: var(--navy); }
+  .pc-ochre h3 { color: var(--ochre-dk); } .pc-ochre h3 i { color: var(--ochre-dk); }
+  .check-item { display: flex; align-items: center; gap: 14px; padding: 13px 0; border-top: 1px solid var(--line); cursor: pointer; user-select: none; min-height: 48px; }
+  .check-item:first-of-type { border-top: none; }
+  .check-btn { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--line-dk); display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: transparent; transition: all .15s; }
+  .check-btn svg { width: 13px; height: 13px; fill: transparent; transition: fill .15s; }
+  .check-label { font-size: 15px; color: var(--ink); font-weight: 400; line-height: 1.35; }
+  .check-item.done .check-label { color: var(--faint); text-decoration: line-through; }
+  .pc-rust .check-item.done .check-btn { background: var(--rust); border-color: var(--rust); }
   .pc-navy .check-item.done .check-btn { background: var(--navy); border-color: var(--navy); }
-  .pc-gold .check-item.done .check-btn { background: var(--gold); border-color: var(--gold); }
-  .check-item.done .check-btn svg { fill: #fff; }
+  .pc-ochre .check-item.done .check-btn { background: var(--ochre); border-color: var(--ochre); }
+  .check-item.done .check-btn svg { fill: #faf6ec; }
 
-  .foot { text-align: center; margin-top: 30px; font-size: 12px; color: var(--faint); }
+  .foot { text-align: center; margin-top: 34px; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
 
-  @media (max-width: 360px) { .cd-num { font-size: 24px; } .wx-day .ico { font-size: 24px; } }
+  @media (max-width: 360px) { .cd-num { font-size: 28px; } .addr { font-size: 22px; } }
 </style>
 </head>
 <body>
@@ -172,14 +174,20 @@
 <header class="topbar">
   <div class="topbar-inner">
     <div class="brand">
-      <div class="flag-chip"><i class="ph ph-tent"></i></div>
+      <svg class="emblem" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="22" stroke="#2c4257" stroke-width="1.5"/>
+        <circle cx="24" cy="24" r="18" stroke="#bd8a30" stroke-width="1"/>
+        <circle cx="24" cy="17" r="3.4" fill="#bd8a30"/>
+        <path d="M9 33 L19 21 L26 30 L31 24 L39 33 Z" fill="#9f3d2c"/>
+        <path d="M9 33 H39" stroke="#2c4257" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
       <div>
         <h1>Fourth of July</h1>
-        <div class="sub">camping weekend · 9 of us</div>
+        <div class="sub">Camping Weekend · 9 of us</div>
       </div>
     </div>
     <nav class="tabbar" role="tablist">
-      <button class="tab active" data-tab="weekend" role="tab">The Weekend</button>
+      <button class="tab active" data-tab="weekend" role="tab">Weekend</button>
       <button class="tab" data-tab="meals" role="tab">Meals</button>
       <button class="tab" data-tab="packing" role="tab">Packing</button>
     </nav>
@@ -188,53 +196,57 @@
 
 <main>
 
-  <!-- ——————————— TAB 1: THE WEEKEND ——————————— -->
+  <!-- ——— TAB 1: WEEKEND ——— -->
   <section class="panel active" id="tab-weekend">
     <div class="stack">
 
       <div class="card count-card">
-        <div class="when">Friday, July 3 → Sunday, July 5, 2026</div>
+        <div class="lead">Counting Down To</div>
+        <div class="when">Friday, July 3 — Sunday, July 5</div>
         <div class="countdown" id="countdown">
-          <div class="cd-cell"><div class="cd-num" id="cd-days">–</div><div class="cd-lbl">days</div></div>
-          <div class="cd-cell"><div class="cd-num" id="cd-hours">–</div><div class="cd-lbl">hrs</div></div>
-          <div class="cd-cell"><div class="cd-num" id="cd-mins">–</div><div class="cd-lbl">min</div></div>
-          <div class="cd-cell"><div class="cd-num" id="cd-secs">–</div><div class="cd-lbl">sec</div></div>
+          <div class="cd-cell"><div class="cd-num" id="cd-days">–</div><div class="cd-lbl">Days</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-cell"><div class="cd-num" id="cd-hours">–</div><div class="cd-lbl">Hrs</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-cell"><div class="cd-num" id="cd-mins">–</div><div class="cd-lbl">Min</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-cell"><div class="cd-num" id="cd-secs">–</div><div class="cd-lbl">Sec</div></div>
         </div>
       </div>
 
       <div>
-        <div class="block-label">Weekend Forecast</div>
+        <div class="block-label"><span>Weekend Forecast</span></div>
         <div class="card" id="wx"></div>
       </div>
 
       <div>
-        <div class="block-label">The Spot</div>
+        <div class="block-label"><span>The Spot</span></div>
         <div class="card addr-card">
           <div class="addr">9812 Ranch Road</div>
-          <div class="addr-sub">home base for the weekend — save it to your maps before you lose signal</div>
-          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=9812%20Ranch%20Road" target="_blank" rel="noopener"><i class="ph ph-navigation-arrow"></i> Get Directions</a>
+          <div class="addr-sub">Home base for the weekend — save it to your maps before you lose signal.</div>
+          <a class="map-btn" href="https://www.google.com/maps/search/?api=1&amp;query=9812%20Ranch%20Road" target="_blank" rel="noopener"><i class="ph-light ph-navigation-arrow"></i> Get Directions</a>
           <div class="logi">
-            <div class="logi-row"><i class="ph ph-clock"></i><div><b>Arrival</b><span>roll in Friday before dark — easier to set up tents in daylight</span></div></div>
-            <div class="logi-row"><i class="ph ph-car-profile"></i><div><b>Carpools</b><span>sort rides in the group chat — fewer cars, easier parking</span></div></div>
-            <div class="logi-row"><i class="ph ph-wifi-slash"></i><div><b>Signal</b><span>assume spotty service — screenshot directions before you head out</span></div></div>
+            <div class="logi-row"><i class="ph-light ph-clock"></i><div><b>Arrival</b><span>Roll in Friday before dark — easier to set up tents in daylight.</span></div></div>
+            <div class="logi-row"><i class="ph-light ph-car-profile"></i><div><b>Carpools</b><span>Sort rides in the group chat — fewer cars, easier parking.</span></div></div>
+            <div class="logi-row"><i class="ph-light ph-wifi-slash"></i><div><b>Signal</b><span>Assume spotty service — screenshot directions before you head out.</span></div></div>
           </div>
         </div>
       </div>
 
       <div>
-        <div class="block-label">The Crew</div>
+        <div class="block-label"><span>The Crew</span></div>
         <div class="crew" id="crew"></div>
       </div>
 
       <div>
-        <div class="block-label">Good to Know</div>
+        <div class="block-label"><span>Good to Know</span></div>
         <div class="card notes-card">
           <ul>
-            <li>leave no trace — pack out everything we bring in, douse the fire fully before bed</li>
-            <li>check the campground's fire + firework rules before the 4th; burn bans vary by site</li>
-            <li>plan a gallon of water per person per day — it goes fast in July heat</li>
-            <li>assign a cooler captain so the ice doesn't melt by Saturday</li>
-            <li>charge everything Friday morning — power's a luxury out there</li>
+            <li>Leave no trace — pack out everything we bring in, douse the fire fully before bed.</li>
+            <li>Check the campground's fire &amp; firework rules before the 4th; burn bans vary by site.</li>
+            <li>Plan a gallon of water per person per day — it goes fast in July heat.</li>
+            <li>Assign a cooler captain so the ice doesn't melt by Saturday.</li>
+            <li>Charge everything Friday morning — power's a luxury out there.</li>
           </ul>
         </div>
       </div>
@@ -242,78 +254,78 @@
     </div>
   </section>
 
-  <!-- ——————————— TAB 2: MEALS ——————————— -->
+  <!-- ——— TAB 2: MEALS ——— -->
   <section class="panel" id="tab-meals">
     <div class="stack">
 
       <div class="card day-card">
-        <div class="day-head"><span class="d">Friday</span><span class="dn">July 3</span></div>
-        <div class="meal"><i class="ph ph-fire"></i><div><div class="when">Dinner</div><div class="what">BBQ chicken thighs, fries, grilled zucchini + pineapple</div></div></div>
+        <div class="day-top"><span class="d">Friday</span><span class="dn">July 3</span></div>
+        <div class="meal"><i class="ph-light ph-fire"></i><div><div class="when">Dinner</div><div class="what">BBQ chicken thighs, fries, grilled zucchini + pineapple</div></div></div>
+      </div>
+
+      <div class="card day-card sat">
+        <div class="day-top"><span class="d">Saturday</span><span class="dn">July 4</span></div>
+        <div class="meal"><i class="ph-light ph-sun-horizon"></i><div><div class="when">Breakfast</div><div class="what">Breakfast tacos</div></div></div>
+        <div class="meal"><i class="ph-light ph-hamburger"></i><div><div class="when">Early Afternoon</div><div class="what">Burgers, brats, coleslaw, pasta salad, chips, watermelon</div></div></div>
+        <div class="meal"><i class="ph-light ph-campfire"></i><div><div class="when">Evening</div><div class="what">S'mores, ice cream sandwiches + popsicles — sammies if anyone's still hungry</div></div></div>
       </div>
 
       <div class="card day-card">
-        <div class="day-head sat"><span class="d">Saturday</span><span class="dn">July 4</span></div>
-        <div class="meal"><i class="ph ph-sun-horizon"></i><div><div class="when">Breakfast</div><div class="what">breakfast tacos</div></div></div>
-        <div class="meal"><i class="ph ph-hamburger"></i><div><div class="when">Early Afternoon</div><div class="what">burgers, brats, coleslaw, pasta salad, chips, watermelon</div></div></div>
-        <div class="meal"><i class="ph ph-campfire"></i><div><div class="when">Evening</div><div class="what">s'mores, ice cream sandwiches + popsicles — sammies if anyone's still hungry</div></div></div>
-      </div>
-
-      <div class="card day-card">
-        <div class="day-head"><span class="d">Sunday</span><span class="dn">July 5</span></div>
-        <div class="meal"><i class="ph ph-coffee"></i><div><div class="when">Breakfast</div><div class="what">pancakes + bacon</div></div></div>
-        <div class="meal"><i class="ph ph-bread"></i><div><div class="when">Lunch</div><div class="what">sandwiches</div></div></div>
+        <div class="day-top"><span class="d">Sunday</span><span class="dn">July 5</span></div>
+        <div class="meal"><i class="ph-light ph-coffee"></i><div><div class="when">Breakfast</div><div class="what">Pancakes + bacon</div></div></div>
+        <div class="meal"><i class="ph-light ph-bread"></i><div><div class="when">Lunch</div><div class="what">Sandwiches</div></div></div>
       </div>
 
     </div>
   </section>
 
-  <!-- ——————————— TAB 3: PACKING ——————————— -->
+  <!-- ——— TAB 3: PACKING ——— -->
   <section class="panel" id="tab-packing">
     <div class="pp-track"><div class="pp-fill" id="pp-fill"></div></div>
     <div class="pp-row">
       <span class="pp-text" id="pp-text">0 of 0 packed</span>
-      <button class="reset-btn" id="reset-btn"><i class="ph ph-arrow-counter-clockwise"></i> Reset</button>
+      <button class="reset-btn" id="reset-btn"><i class="ph-light ph-arrow-counter-clockwise"></i> Reset</button>
     </div>
 
     <div class="stack">
-      <div class="card pack-card pc-red">
-        <h3><i class="ph ph-user-circle"></i> Everyone Brings</h3>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sleeping bag + pillow</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sleeping pad / air mattress</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">clothes + warm layer for night</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">swimsuit + towel</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">red/white/blue outfit for the 4th</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">toiletries + meds</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">water bottle</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">headlamp / flashlight</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">phone + battery pack</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">camp chair</span></div>
+      <div class="card pack-card pc-rust">
+        <h3><i class="ph-light ph-user-circle"></i> Everyone Brings</h3>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Sleeping bag + pillow</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Sleeping pad / air mattress</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Clothes + warm layer for night</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Swimsuit + towel</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Red/white/blue outfit for the 4th</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Toiletries + meds</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Water bottle</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Headlamp / flashlight</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Phone + battery pack</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Camp chair</span></div>
       </div>
 
       <div class="card pack-card pc-navy">
-        <h3><i class="ph ph-tent"></i> Group Gear</h3>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">tents + stakes</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">coolers + ice</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">grill / camp stove + propane</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">firewood + lighter / matches</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">cooking pot, pan + utensils</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">plates, cups, cutlery, napkins</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">trash + recycling bags</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">bluetooth speaker</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">canopy / shade tent</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">lawn games (cornhole, spikeball)</span></div>
+        <h3><i class="ph-light ph-tent"></i> Group Gear</h3>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Tents + stakes</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Coolers + ice</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Grill / camp stove + propane</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Firewood + lighter / matches</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Cooking pot, pan + utensils</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Plates, cups, cutlery, napkins</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Trash + recycling bags</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Bluetooth speaker</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Canopy / shade tent</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Lawn games (cornhole, spikeball)</span></div>
       </div>
 
-      <div class="card pack-card pc-gold">
-        <h3><i class="ph ph-sun"></i> Don't Forget</h3>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sunscreen</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">bug spray</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">first-aid kit</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">cash for firewood / site fees</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sunglasses + hat</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">sparklers + glow sticks</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">paper towels + dish soap</span></div>
-        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">camera</span></div>
+      <div class="card pack-card pc-ochre">
+        <h3><i class="ph-light ph-sun"></i> Don't Forget</h3>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Sunscreen</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Bug spray</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">First-aid kit</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Cash for firewood / site fees</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Sunglasses + hat</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Sparklers + glow sticks</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Paper towels + dish soap</span></div>
+        <div class="check-item"><div class="check-btn"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><span class="check-label">Camera</span></div>
       </div>
     </div>
   </section>
@@ -323,31 +335,32 @@
 </main>
 
 <script>
-  // ——— falling stars (subtle) ———
+  // ——— falling stars ———
   (function(){
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const layer = document.getElementById('starfall');
-    const COLORS = ['#ffffff','#0a3161','#b22234','#c79a2e'];
+    const COLORS = ['#bd8a30','#9f3d2c','#2c4257','#cdbf9f'];
+    const GLYPHS = ['★','✦'];
     function spawn(){
       if (document.hidden) return;
       const s = document.createElement('span');
-      s.className = 'falling-star'; s.textContent = '★';
-      const size = 7 + Math.random()*12, dur = 7 + Math.random()*6, op = 0.16 + Math.random()*0.26;
+      s.className = 'falling-star'; s.textContent = GLYPHS[(Math.random()*GLYPHS.length)|0];
+      const size = 7 + Math.random()*11, dur = 8 + Math.random()*6, op = 0.14 + Math.random()*0.24;
       s.style.left = (Math.random()*100) + 'vw';
       s.style.fontSize = size + 'px';
       s.style.color = COLORS[(Math.random()*COLORS.length)|0];
       s.style.setProperty('--op', op);
-      s.style.setProperty('--spin', (Math.random()*620-310)+'deg');
+      s.style.setProperty('--spin', (Math.random()*560-280)+'deg');
       s.style.animation = `fall ${dur}s linear forwards`;
       layer.appendChild(s);
       setTimeout(()=>s.remove(), dur*1000+250);
     }
-    setInterval(spawn, 520);
-    for (let i=0;i<5;i++) setTimeout(spawn, i*200);
+    setInterval(spawn, 540);
+    for (let i=0;i<5;i++) setTimeout(spawn, i*220);
     let lastY = window.scrollY, ticking = false;
     window.addEventListener('scroll', ()=>{
       if (ticking) return; ticking = true;
-      requestAnimationFrame(()=>{ if (Math.abs(window.scrollY-lastY)>50){ spawn(); lastY = window.scrollY; } ticking = false; });
+      requestAnimationFrame(()=>{ if (Math.abs(window.scrollY-lastY)>52){ spawn(); lastY = window.scrollY; } ticking = false; });
     }, { passive:true });
   })();
 
@@ -362,7 +375,7 @@
 
   // ——— crew ———
   const crew = ["Chad","Alexa","Ali","Cheech","Mike","Ali","Jack","Emme","Me"];
-  const avc = ["#b22234","#0a3161","#c79a2e"];
+  const avc = ["#9f3d2c","#2c4257","#bd8a30"];
   const cw = document.getElementById('crew');
   crew.forEach((n,i)=>{ const c=document.createElement('div'); c.className='crew-chip';
     c.innerHTML=`<span class="crew-av" style="background:${avc[i%3]}">${n[0]}</span>${n}`; cw.appendChild(c); });
@@ -371,14 +384,14 @@
   const target = new Date("2026-07-03T12:00:00").getTime();
   function tick(){
     const diff = target - Date.now(), cd = document.getElementById('countdown');
-    if (diff <= 0){ cd.innerHTML = '<div class="cd-done">It\'s go time — see you at camp</div>'; return; }
+    if (diff <= 0){ cd.innerHTML = '<div class="cd-done">It\'s go time — see you at camp.</div>'; return; }
     const d=Math.floor(diff/864e5), h=Math.floor(diff%864e5/36e5), m=Math.floor(diff%36e5/6e4), s=Math.floor(diff%6e4/1e3);
-    cd.querySelector('#cd-days').textContent=d; cd.querySelector('#cd-hours').textContent=h;
-    cd.querySelector('#cd-mins').textContent=m; cd.querySelector('#cd-secs').textContent=s;
+    const set=(id,v)=>{ const el=cd.querySelector('#'+id); if(el) el.textContent=v; };
+    set('cd-days',d); set('cd-hours',h); set('cd-mins',m); set('cd-secs',s);
   }
   tick(); setInterval(tick, 1000);
 
-  // ——— packing list ———
+  // ——— packing ———
   const STORE = "july4camp.packing.v2";
   const items = document.querySelectorAll(".check-item");
   let saved = {}; try { saved = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch(e){}
@@ -402,29 +415,28 @@
   const TRIP = { start: "2026-07-03", end: "2026-07-05" };
   const WX = document.getElementById('wx');
   const WCODE = c => {
-    if (c===0) return ['ph-sun','sun','Clear'];
-    if (c<=2)  return ['ph-cloud-sun','sun','Partly sunny'];
-    if (c===3) return ['ph-cloud','','Cloudy'];
-    if (c<=48) return ['ph-cloud-fog','','Fog'];
-    if (c<=57) return ['ph-cloud-rain','','Drizzle'];
-    if (c<=67) return ['ph-cloud-rain','','Rain'];
-    if (c<=77) return ['ph-snowflake','','Snow'];
-    if (c<=82) return ['ph-cloud-rain','','Showers'];
-    if (c<=86) return ['ph-snowflake','','Snow'];
-    return ['ph-cloud-lightning','','Storms'];
+    if (c===0) return ['ph-sun','sun'];
+    if (c<=2)  return ['ph-cloud-sun','sun'];
+    if (c===3) return ['ph-cloud',''];
+    if (c<=48) return ['ph-cloud-fog',''];
+    if (c<=67) return ['ph-cloud-rain',''];
+    if (c<=77) return ['ph-snowflake',''];
+    if (c<=82) return ['ph-cloud-rain',''];
+    if (c<=86) return ['ph-snowflake',''];
+    return ['ph-cloud-lightning',''];
   };
   const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  function wxState(icon, text){ WX.classList.remove('wx-grid'); WX.innerHTML = `<div class="wx-state"><i class="ph ${icon}"></i><div>${text}</div></div>`; }
+  function wxState(icon, text){ WX.classList.remove('wx-grid'); WX.innerHTML = `<div class="wx-state"><i class="ph-light ${icon}"></i><div>${text}</div></div>`; }
   async function loadWeather(){
     try {
       if (!SPOT.lat && SPOT.town){
         const g = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(SPOT.town)}&count=1&country=US`).then(r=>r.json());
         if (g.results && g.results[0]){ SPOT.lat=g.results[0].latitude; SPOT.lon=g.results[0].longitude; }
       }
-      if (!SPOT.lat){ wxState('ph-map-pin-line', "Once we lock the nearest town, the live July&nbsp;3–5 forecast shows up right here."); return; }
+      if (!SPOT.lat){ wxState('ph-map-pin-line', "Add the nearest town and the live July&nbsp;3–5 forecast will appear here."); return; }
       const u = `https://api.open-meteo.com/v1/forecast?latitude=${SPOT.lat}&longitude=${SPOT.lon}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&timezone=auto&start_date=${TRIP.start}&end_date=${TRIP.end}`;
       const d = await fetch(u).then(r=>r.json());
-      if (!d.daily || !d.daily.time || !d.daily.time.length){ wxState('ph-calendar-dots', "Forecast isn't out this far yet — it'll fill in as we get closer to the trip."); return; }
+      if (!d.daily || !d.daily.time || !d.daily.time.length){ wxState('ph-calendar-dots', "Forecast isn't out this far yet — it'll fill in as we get closer."); return; }
       WX.classList.add('wx-grid'); WX.innerHTML = '';
       d.daily.time.forEach((iso,i)=>{
         const dt = new Date(iso+'T12:00:00');
@@ -434,7 +446,7 @@
         const pop = d.daily.precipitation_probability_max[i];
         const cell = document.createElement('div'); cell.className = 'wx-day';
         cell.innerHTML = `<div class="dow">${DOW[dt.getDay()]}</div><div class="date">${dt.getMonth()+1}/${dt.getDate()}</div>`+
-          `<div class="ico ${cls}"><i class="ph ${ic}"></i></div><div class="hi">${hi}°</div><div class="lo">${lo}°</div>`+
+          `<div class="ico ${cls}"><i class="ph-light ${ic}"></i></div><div class="hi">${hi}°</div><div class="lo">${lo}°</div>`+
           (pop!=null ? `<div class="pop">${pop}% rain</div>` : '');
         WX.appendChild(cell);
       });
